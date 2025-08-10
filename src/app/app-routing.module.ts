@@ -1,15 +1,22 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { platformLayoutGuard } from './guards/platform-layout.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/inbox',
-    pathMatch: 'full'
+    redirectTo: 'web/home',
+    pathMatch: 'full',
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    path: 'web/home',
+    canActivate: [platformLayoutGuard],
+    loadChildren: () => import('./pages/web/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'mobile/home',
+    canActivate: [platformLayoutGuard],
+    loadChildren: () => import('./pages/mobile/home/home.module').then( m => m.HomePageModule)
   }
 ];
 

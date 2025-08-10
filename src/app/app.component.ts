@@ -15,5 +15,8 @@ export class AppComponent {
     { title: 'Spam', url: '/folder/spam', icon: 'warning' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+
+  public showMenu: boolean = false;
+  
   constructor() {}
 }

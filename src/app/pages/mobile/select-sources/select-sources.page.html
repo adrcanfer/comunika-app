@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Seleccionar fuentes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content ion-padding">
+    <div class="search-input ion-padding">
+        <ion-input fill="outline" placeholder="Buscar fuentes" type="text" mode="md" (ionInput)="searchInput($event)" (keyup.enter)="search()">
+          <ion-button fill="clear" slot="end" (click)="search()">
+            <ion-icon slot="icon-only" name="search"></ion-icon>
+          </ion-button>
+        </ion-input>
+    </div>
+
+    <div class="search-content ion-padding" *ngIf="sourcesToShow">
+      <ion-list lines="none">
+        <ng-container *ngFor="let s of sourcesToShow">
+          <app-source-entry [source]="s" (updatedElement)="updateSourceElement($event)"></app-source-entry>
+        </ng-container>
+        <div *ngIf="sourcesToShow.length == 0">No se ha encontrado ninguna fuente por '{{searchKey}}'</div>
+      </ion-list>
+    </div>
+
+    <div class="floatting-button" *ngIf="showSaveButton">
+      <ion-button color="secondary" shape="round">Hecho</ion-button>
+    </div>
+
+  </div>
+
+</ion-content>

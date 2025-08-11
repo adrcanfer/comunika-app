@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SpinnerService } from './services/spinner.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
   standalone: false,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public appPages = [
     { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
     { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
@@ -17,6 +18,17 @@ export class AppComponent {
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   public showMenu: boolean = false;
+  public loading: boolean = false;
+
   
-  constructor() {}
+  constructor(
+    private spinnerService: SpinnerService, 
+  ) {}
+
+  ngOnInit() {
+    //Cargamos la configuración del spinner
+    this.spinnerService.$loading.subscribe(loading => {
+      this.loading = loading;
+    });
+  }
 }

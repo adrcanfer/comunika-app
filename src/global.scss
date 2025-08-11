@@ -36,6 +36,24 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 //@import "@ionic/angular/css/palettes/dark.system.css";
 
+//==============BASIC===============
 .text-center {
     text-align: center;
 }
+
+//===============AUX================
+
+.floatting-button {
+    position: fixed; 
+    bottom: 70px;       
+    left: 0;           
+    right: 0;          
+    z-index: 1000;
+    padding: 10px 16px;  
+    display: flex;
+    justify-content: center;
+  
+    & button {
+        max-width: 500px;
+    }
+  }

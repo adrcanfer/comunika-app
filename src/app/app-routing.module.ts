@@ -14,9 +14,9 @@ const routes: Routes = [
     loadChildren: () => import('./pages/web/home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: 'mobile/home',
+    path: 'mobile',
     canActivate: [platformLayoutGuard],
-    loadChildren: () => import('./pages/mobile/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/mobile/mobile.module').then( m => m.MobileModule)
   }
 ];
 

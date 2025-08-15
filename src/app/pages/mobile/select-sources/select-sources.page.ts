@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { GetResult, Preferences } from '@capacitor/preferences';
 import { ViewWillEnter } from '@ionic/angular';
 import { Source } from 'src/app/model/source.model';
 import { SourceService } from 'src/app/services/source.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { PreferenceConstants } from 'src/app/utils/preferences.util';
 
 @Component({
   selector: 'app-select-sources',
@@ -20,17 +22,16 @@ export class SelectSourcesPage implements ViewWillEnter {
   private selectedSources: Map<string, Source> = new Map();
   private savedSources: Map<string, Source> = new Map();
 
-  
-
   constructor(
     private sourceService: SourceService,
     private spinnerService: SpinnerService
   ) { }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     //Recuperar los elementos guardados de las preferencias
-    //this.savedSources....
-    //this.selectedSources = this.savedSources to map;
+    this.loadSavedSubscriptions();
+
+
   }
 
   searchInput(event: any) {
@@ -59,7 +60,7 @@ export class SelectSourcesPage implements ViewWillEnter {
       this.selectedSources.delete(updatedSource.id!);
     }
 
-    setTimeout(this.processSources, 100);
+    this.processSources();
   }
 
   private processSources() {
@@ -87,10 +88,30 @@ export class SelectSourcesPage implements ViewWillEnter {
     this.showSaveButton = Array.from(this.selectedSources.values()).find(s => !this.savedSources.has(s.id!)) != undefined;
   }
 
-  save() {
+  async save() {
     //Guardar en las preferencias
+    const subscribedSources = [...this.selectedSources.values()];
+    await Preferences.set({key: PreferenceConstants.subscribedSources, value: JSON.stringify(subscribedSources)});
 
     //Guardar en el backend
+    
+  }
+
+  private async loadSavedSubscriptions() {
+    const subscriptionsStr = (await Preferences.get({key: PreferenceConstants.subscribedSources}))?.value;
+
+    if(subscriptionsStr) {
+      const subscriptions: Source[] = JSON.parse(subscriptionsStr);
+
+      this.savedSources = new Map();
+      this.selectedSources = new Map();
+      subscriptions.forEach(s => {
+        this.savedSources.set(s.id!, s);
+        this.selectedSources.set(s.id!, s);
+      });
+
+      this.processSources();
+    }
   }
 
 }

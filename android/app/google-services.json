@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "701591563049",
+    "project_id": "comunika-app",
+    "storage_bucket": "comunika-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701591563049:android:ef155dfe40859ce7282538",
+        "android_client_info": {
+          "package_name": "com.adrcanfer.comunika"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSV2L0llo3OfTR5RJ28QQ2R1ohnlkovk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

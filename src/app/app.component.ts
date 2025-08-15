@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from './services/spinner.service';
+import { NotificationService } from './services/notification.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -23,12 +24,16 @@ export class AppComponent implements OnInit {
   
   constructor(
     private spinnerService: SpinnerService, 
+    private notificationService: NotificationService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     //Cargamos la configuración del spinner
     this.spinnerService.$loading.subscribe(loading => {
       this.loading = loading;
     });
+
+    //Cargamos la configuración para las pushes
+    await this.notificationService.init();
   }
 }

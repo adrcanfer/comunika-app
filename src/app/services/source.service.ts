@@ -12,10 +12,15 @@ export class SourceService {
   ) { }
 
   // Método encargado de buscar los sources
-  getsources(query: string): Promise<Sources> {
+  getSources(query: string): Promise<Sources> {
     let url = `source?name=${query}`;
     return this.apiService.doGet(url);
   }
 
-
+  // Método encargado de recuperar los sources
+  getSourcesBatch(sourceIds: string): Promise<Sources> {
+    let url = `source/batch/search`;
+    const body = {sourceIds}
+    return this.apiService.doPost(url, body);
+  }
 }

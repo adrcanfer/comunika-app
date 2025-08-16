@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { GetResult, Preferences } from '@capacitor/preferences';
+import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Preferences } from '@capacitor/preferences';
 import { ViewWillEnter } from '@ionic/angular';
-import { Source } from 'src/app/model/source.model';
+import { sortAlfaphetically, Source } from 'src/app/model/source.model';
 import { SourceService } from 'src/app/services/source.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { SubscriptionService } from 'src/app/services/subscription.service';
 import { PreferenceConstants } from 'src/app/utils/preferences.util';
 
 @Component({
@@ -24,14 +27,15 @@ export class SelectSourcesPage implements ViewWillEnter {
 
   constructor(
     private sourceService: SourceService,
-    private spinnerService: SpinnerService
+    private subscriptionService: SubscriptionService,
+    private spinnerService: SpinnerService,
+    private router: Router,
+    private location: Location
   ) { }
 
   async ionViewWillEnter() {
     //Recuperar los elementos guardados de las preferencias
     this.loadSavedSubscriptions();
-
-
   }
 
   searchInput(event: any) {
@@ -43,7 +47,7 @@ export class SelectSourcesPage implements ViewWillEnter {
   search() {
     if(this.searchKey.length > 0) {
       this.spinnerService.showSpinner();
-      this.sourceService.getsources(this.searchKey)
+      this.sourceService.getSources(this.searchKey)
         .then(value => {
           this.sources = new Map();
           value.items.forEach(s => this.sources.set(s.id!, s));
@@ -85,32 +89,56 @@ export class SelectSourcesPage implements ViewWillEnter {
     this.sourcesToShow.push(...this.sources.values());
 
     // Habilitamos el boton de guardar
-    this.showSaveButton = Array.from(this.selectedSources.values()).find(s => !this.savedSources.has(s.id!)) != undefined;
+    this.showSaveButton = 
+      Array.from(this.selectedSources.values()).find(s => !this.savedSources.has(s.id!)) != undefined
+      || Array.from(this.savedSources.values()).find(s => !this.selectedSources.has(s.id!)) != undefined;
   }
 
   async save() {
     //Guardar en las preferencias
     const subscribedSources = [...this.selectedSources.values()];
-    await Preferences.set({key: PreferenceConstants.subscribedSources, value: JSON.stringify(subscribedSources)});
+    const subscribedSourceIds = subscribedSources.map(x => x.id!);
+    await Preferences.set({key: PreferenceConstants.subscribedSources, value: JSON.stringify(subscribedSourceIds)});
+
+    //Recuperamos el token de push
+    const pushToken = (await Preferences.get({key: PreferenceConstants.pushToken}))?.value || undefined;
 
     //Guardar en el backend
-    
+    if(pushToken) {
+      const subscribedSoruceIds = subscribedSources.map(s => s.id!);
+      this.spinnerService.showSpinner();
+      await this.subscriptionService.postSubscriptions(subscribedSoruceIds, pushToken);
+      this.spinnerService.closeSpinner();
+    }
+
+    //Redirijimos al listado de noticias
+    this.router.navigateByUrl('mobile/events');
+  }
+
+  back() {
+    this.location.back();
   }
 
   private async loadSavedSubscriptions() {
     const subscriptionsStr = (await Preferences.get({key: PreferenceConstants.subscribedSources}))?.value;
-
+    
     if(subscriptionsStr) {
-      const subscriptions: Source[] = JSON.parse(subscriptionsStr);
+      this.spinnerService.showSpinner();
+      const sourceIds = JSON.parse(subscriptionsStr);
+
+      const subscribedSources: Source[] = (await this.sourceService.getSourcesBatch(sourceIds)).items;
+      subscribedSources.forEach(s => s.selected = true);
+      sortAlfaphetically(subscribedSources);
 
       this.savedSources = new Map();
       this.selectedSources = new Map();
-      subscriptions.forEach(s => {
+      subscribedSources.forEach(s => {
         this.savedSources.set(s.id!, s);
         this.selectedSources.set(s.id!, s);
       });
 
       this.processSources();
+      this.spinnerService.closeSpinner();
     }
   }
 

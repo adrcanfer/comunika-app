@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-button (click)="back()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Seleccionar fuentes</ion-title>
   </ion-toolbar>
@@ -20,7 +22,7 @@
     <div class="search-content ion-padding" *ngIf="sourcesToShow">
       <ion-list lines="none">
         <ng-container *ngFor="let s of sourcesToShow">
-          <app-source-entry [source]="s" (updatedElement)="updateSourceElement($event)"></app-source-entry>
+          <app-source-entry [source]="s" [selectable]="true" (updatedElement)="updateSourceElement($event)"></app-source-entry>
         </ng-container>
         <div *ngIf="sourcesToShow.length == 0">No se ha encontrado ninguna fuente por '{{searchKey}}'</div>
       </ion-list>

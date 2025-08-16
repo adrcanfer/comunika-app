@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container ion-padding" *ngIf="eventDetail">
+    <div class="event-title ion-padding">{{eventDetail.title}}</div>
+    <div class="event-description ion-padding" [innerHtml]="eventDetail.content"></div>
+  </div>
+  <div class="footer">
+    <app-event-footer *ngIf="eventDetail" [event]="eventDetail"></app-event-footer>
+  </div>
+</ion-content>

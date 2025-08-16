@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from './services/spinner.service';
 import { NotificationService } from './services/notification.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -9,22 +13,22 @@ import { NotificationService } from './services/notification.service';
 })
 export class AppComponent implements OnInit {
   public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+    { title: 'Notificaciones', url: '/mobile/home', icon: 'mail' },
+    { title: 'Calendario', url: '/mobile/calendar', icon: 'calendar' },
+    { title: 'Fuentes de Datos', url: '/mobile/select-sources', icon: 'radio' },
+    { title: 'Sobre Nosotros', url: '/mobile/select-sources', icon: 'information-circle' }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
-  public showMenu: boolean = false;
+  public showMenu: boolean = true;
   public loading: boolean = false;
+  closed$ = new Subject<any>();
+
 
   
   constructor(
     private spinnerService: SpinnerService, 
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -33,7 +37,26 @@ export class AppComponent implements OnInit {
       this.loading = loading;
     });
 
-    //Cargamos la configuración para las pushes
+    //Cargamos el menu
+    this.loadMenu(this.router.url);
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd),
+      takeUntil(this.closed$)
+    ).subscribe((event: NavigationEnd) => {
+      this.loadMenu(event.url);
+    });
+
+    // IMPORTANTE -> AL FINAL
+    //Cargamos la configuración para las pushes 
     await this.notificationService.init();
+  }
+
+  ngOnDestroy() {
+    this.closed$.unsubscribe();
+  }
+
+  // Lógica de validación en una función separada para evitar duplicación
+  private loadMenu(url: string): void {
+    this.showMenu = url.includes('events');
   }
 }

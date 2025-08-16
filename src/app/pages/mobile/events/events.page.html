@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Notificaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshContent($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="container ion-padding">
+    <div class="events">
+      <app-event-entry *ngFor="let e of events" [event]="e"></app-event-entry>
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="loadNextContent($event)" threshold="100px" [disabled]="endInfiniteScroll">
+      <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <div class="ion-padding" *ngIf="events && events.length === 0">
+      Aún no hay eventos disponibles.
+    </div>
+  </div>
+</ion-content>

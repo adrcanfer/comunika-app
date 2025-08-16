@@ -43,6 +43,25 @@
 
 //===============AUX================
 
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}   
+
 .floatting-button {
     position: fixed; 
     bottom: 70px;       
@@ -57,3 +76,4 @@
         max-width: 500px;
     }
   }
+

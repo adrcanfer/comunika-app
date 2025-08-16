@@ -44,9 +44,9 @@ export class NotificationService {
 
   // Método auxiliar encargado de escuchar los listener de Firebase
   private async loadListeners() {
-    await PushNotifications.addListener('registration', (token: any) => {
+    await PushNotifications.addListener('registration', async (token: any) => {
       console.info('Registration token: ', token.value);
-      this.saveToken(token.value);
+      await this.saveToken(token.value);
     });
 
     await PushNotifications.addListener('registrationError', (err: any) => {
@@ -54,25 +54,13 @@ export class NotificationService {
     });
 
     await PushNotifications.addListener('pushNotificationReceived', async (data: any) => {
-      const notification = {
-        title: data.data.title,
-        content: data.data.content,
-        creationDate: data.data.timestamp
-      }
-
-      console.log("NOTIFICATION RECEIVED: " + notification);
+      console.log("NOTIFICATION RECEIVED");
     });
 
     await PushNotifications.addListener('pushNotificationActionPerformed', async (data: any) => {
-      const notification = {
-        title: data.notification.data.title,
-        content: data.notification.data.content,
-        sendingDate: data.notification.data.timestamp
-      }
-
-      console.log("NOTIFICATION RECEIVED: " + notification);
-
-      //TODO this.router.navigateByUrl('notifications');
+      const sourceId = data.notification.data.sourceId;
+      console.log("NOTIFICATION OPENED: " + sourceId);
+      this.router.navigateByUrl('/mobile/event/' + sourceId);
     });
   }
 

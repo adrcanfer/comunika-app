@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ViewWillEnter } from '@ionic/angular';
+import { Event } from "src/app/model/event.model";
 import { EventService } from 'src/app/services/event.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import { Event } from "src/app/model/event.model";
-import { Preferences } from '@capacitor/preferences';
-import { PreferenceConstants } from 'src/app/utils/preferences.util';
-import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -20,20 +19,18 @@ export class EventsPage implements ViewWillEnter {
   endInfiniteScroll = false;
 
   private lastKey?: string;
+  private sourceId!: string;
 
   constructor(
+    private activedRouter: ActivatedRoute,
     private spinnerService: SpinnerService,
     private eventService: EventService,
-    private router: Router
+    private location: Location
   ) { }
 
   async ionViewWillEnter() {
-    const hasSubscribedSources = (await Preferences.get({key: PreferenceConstants.subscribedSources}))?.value != undefined;
-
-    if(!hasSubscribedSources) {
-      this.router.navigateByUrl('/mobile/home');
-      return;
-    } 
+    this.sourceId = this.activedRouter.snapshot.paramMap.get('sourceId') ?? '';
+    console.log(this.sourceId);
 
     if(!this.events) {
       this.getEvents(true, true);
@@ -49,6 +46,10 @@ export class EventsPage implements ViewWillEnter {
     this.getEvents(false, true, event);
   }
 
+  back() {
+    this.location.back();
+  }
+
   private getEvents(first: boolean = true, refresh: boolean = false, event?: any) {
     if(first) this.spinnerService.showSpinner();
 
@@ -56,7 +57,7 @@ export class EventsPage implements ViewWillEnter {
       this.lastKey = undefined;
     }
 
-    this.eventService.getEvents(this.lastKey)
+    this.eventService.getEvents(this.sourceId, this.lastKey)
       .then(async data => {    
         if(first || refresh) this.events = [];
             

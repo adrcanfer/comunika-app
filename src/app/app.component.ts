@@ -13,7 +13,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
   public appPages = [
-    { title: 'Notificaciones', url: '/mobile/sources/notifications', icon: 'mail' },
+    { title: 'Notificaciones', url: '/mobile/sources/events', icon: 'mail' },
     { title: 'Calendario', url: '/mobile/sources/calendar', icon: 'calendar' },
     { title: 'Fuentes de Datos', url: '/mobile/select-sources', icon: 'radio' },
     { title: 'Sobre Nosotros', url: '/mobile/select-sources', icon: 'information-circle' }

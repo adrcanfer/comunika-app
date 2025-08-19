@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Source } from 'src/app/model/source.model';
 
 @Component({
@@ -12,12 +13,14 @@ export class SourceEntryComponent  implements OnInit {
   @Input() source! : Source;
   @Input() action : string = 'notifications'
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {}
 
   showDetail() {
-    
+    this.router.navigateByUrl(`/mobile/${this.action}/${this.source.id}`);
   }
 
 }

@@ -16,17 +16,18 @@ const routes: Routes = [
     loadChildren: () => import('./select-sources/select-sources.module').then(m => m.SelectSourcesPageModule)
   },
   {
-    path: 'events',
+    path: 'sources/:action',
+    loadChildren: () => import('./sources/sources.module').then( m => m.SourcesPageModule)
+  },
+  {
+    path: 'events/:sourceId',
     loadChildren: () => import('./events/events.module').then( m => m.EventsPageModule)
   },
   {
     path: 'event/:eventId',
     loadChildren: () => import('./event/event.module').then( m => m.EventPageModule)
-  },
-  {
-    path: 'sources/:action',
-    loadChildren: () => import('./sources/sources.module').then( m => m.SourcesPageModule)
   }
+  
 ];
 
 @NgModule({

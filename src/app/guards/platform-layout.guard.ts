@@ -9,7 +9,7 @@ export const platformLayoutGuard: CanActivateFn = async (route: ActivatedRouteSn
   const router = inject(Router);
 
   const currentUrl = state.url;
-  const isMobile = true; //platform.is('mobile')
+  const isMobile = platform.is('mobile')
 
   if (isMobile && !currentUrl.includes('mobile')) {
     router.navigateByUrl('mobile/home');

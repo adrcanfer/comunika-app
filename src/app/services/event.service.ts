@@ -15,18 +15,14 @@ export class EventService {
   ) { }
 
   // Método encargado de buscar los eventos
-  async getEvents(lastKey?: string): Promise<Events> {
-    let url = `event/search`;
+  async getEvents(sourceId: string, lastKey?: string): Promise<Events> {
+    let url = `event?sourceId=${sourceId}`;
 
     if(lastKey != undefined) {
-      url += `?lastKey=${lastKey}`;
+      url += `&lastKey=${lastKey}`;
     }
 
-    const requestBody = {
-      sources: (await this.subscriptionService.getSubscriptionsIdFromStorage())
-    }
-
-    return this.apiService.doPost(url, requestBody);
+    return this.apiService.doGet(url);
   }
 
   async getEvent(id: string): Promise<Event> {

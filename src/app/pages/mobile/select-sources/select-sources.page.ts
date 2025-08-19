@@ -115,11 +115,11 @@ export class SelectSourcesPage implements ViewWillEnter {
       this.subscriptionService.postSubscriptions(subscribedSoruceIds, pushToken)
         .finally(() => {
           this.spinnerService.closeSpinner();
-          this.router.navigateByUrl('mobile/sources/notifications');
+          this.router.navigateByUrl('mobile/sources/events');
         });
     } else {
       //Redirijimos al listado de noticias
-      this.router.navigateByUrl('mobile/sources/notifications');
+      this.router.navigateByUrl('mobile/sources/events');
     }
 
   }

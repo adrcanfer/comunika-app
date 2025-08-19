@@ -15,7 +15,7 @@ import { PreferenceConstants } from 'src/app/utils/preferences.util';
 })
 export class SourcesPage implements ViewWillEnter {
 
-  action: string = 'notifications';
+  action: string = 'events';
   sources?: Source[];
 
   constructor(
@@ -48,7 +48,7 @@ export class SourcesPage implements ViewWillEnter {
 
   getTitle() {
     switch(this.action) {
-      case 'notifications': 
+      case 'events': 
         return "Notificaciones";
       case 'calendar': 
         return "Calendario"

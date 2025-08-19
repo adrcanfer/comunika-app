@@ -16,6 +16,8 @@
     "ios-build": "ionic build --prod & ionic capacitor sync ios",
     "android-debug": "ionic capacitor run android -l --external",
     "ios-debug": "ionic capacitor run ios -l --external",
+    "android-install": "npx cap run android",
+    "ios-install": "npx cap run ios",
     "android-open": "npx cap open android",
     "ios-open": "npx cap open ios"
   },

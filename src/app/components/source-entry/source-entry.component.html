@@ -1,12 +1,13 @@
-<ion-item class="item">
-  <div slot="start" (click)="onCheckboxChange()">
-    <img *ngIf="source.icon !== undefined && source.icon !== ''" class="source-icon" [src]="source.icon" alt="" />
-    <div *ngIf="source.icon === undefined || source.icon === ''" class="initial-circle">
-      {{ source.name.charAt(0) | uppercase }}
+<ion-card (click)="showDetail()">
+  <div class="row ion-padding">
+    <div class="col ion-padding-end icon-col">
+      <img class="source-icon" *ngIf="source.icon !== undefined && source.icon !== ''" [src]="source.icon" alt="" />
+      <div *ngIf="source.icon === undefined || source.icon === ''" class="initial-circle">
+        {{ source.name.charAt(0) | uppercase }}
+      </div>
+    </div>
+    <div class="main-col">
+      <div class="source-name">{{source.name}}</div>
     </div>
   </div>
-  <div (click)="onCheckboxChange()">
-    <ion-label>{{source.name}}</ion-label>
-  </div>
-  <ion-checkbox *ngIf="selectable" slot="end" [checked]="source.selected" (click)="$event.stopPropagation()" (ionChange)="onCheckboxChange()"></ion-checkbox>
-</ion-item>
+</ion-card>

@@ -98,7 +98,12 @@ export class SelectSourcesPage implements ViewWillEnter {
     //Guardar en las preferencias
     const subscribedSources = [...this.selectedSources.values()];
     const subscribedSourceIds = subscribedSources.map(x => x.id!);
-    await Preferences.set({key: PreferenceConstants.subscribedSources, value: JSON.stringify(subscribedSourceIds)});
+
+    if(subscribedSourceIds.length == 0) {
+      await Preferences.remove({key: PreferenceConstants.subscribedSources});
+    } else {
+      await Preferences.set({key: PreferenceConstants.subscribedSources, value: JSON.stringify(subscribedSourceIds)});
+    }
 
     //Recuperamos el token de push
     const pushToken = (await Preferences.get({key: PreferenceConstants.pushToken}))?.value || undefined;
@@ -107,12 +112,16 @@ export class SelectSourcesPage implements ViewWillEnter {
     if(pushToken) {
       const subscribedSoruceIds = subscribedSources.map(s => s.id!);
       this.spinnerService.showSpinner();
-      await this.subscriptionService.postSubscriptions(subscribedSoruceIds, pushToken);
-      this.spinnerService.closeSpinner();
+      this.subscriptionService.postSubscriptions(subscribedSoruceIds, pushToken)
+        .finally(() => {
+          this.spinnerService.closeSpinner();
+          this.router.navigateByUrl('mobile/sources/notifications');
+        });
+    } else {
+      //Redirijimos al listado de noticias
+      this.router.navigateByUrl('mobile/sources/notifications');
     }
 
-    //Redirijimos al listado de noticias
-    this.router.navigateByUrl('mobile/events');
   }
 
   back() {

@@ -3,6 +3,9 @@ import { ViewWillEnter } from '@ionic/angular';
 import { EventService } from 'src/app/services/event.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { Event } from "src/app/model/event.model";
+import { Preferences } from '@capacitor/preferences';
+import { PreferenceConstants } from 'src/app/utils/preferences.util';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,10 +23,18 @@ export class EventsPage implements ViewWillEnter {
 
   constructor(
     private spinnerService: SpinnerService,
-    private eventService: EventService
+    private eventService: EventService,
+    private router: Router
   ) { }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
+    const hasSubscribedSources = (await Preferences.get({key: PreferenceConstants.subscribedSources}))?.value != undefined;
+
+    if(!hasSubscribedSources) {
+      this.router.navigateByUrl('/mobile/home');
+      return;
+    } 
+
     if(!this.events) {
       this.getEvents(true, true);
     }

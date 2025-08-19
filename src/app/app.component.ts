@@ -13,8 +13,8 @@ import { filter, takeUntil } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
   public appPages = [
-    { title: 'Notificaciones', url: '/mobile/home', icon: 'mail' },
-    { title: 'Calendario', url: '/mobile/calendar', icon: 'calendar' },
+    { title: 'Notificaciones', url: '/mobile/sources/notifications', icon: 'mail' },
+    { title: 'Calendario', url: '/mobile/sources/calendar', icon: 'calendar' },
     { title: 'Fuentes de Datos', url: '/mobile/select-sources', icon: 'radio' },
     { title: 'Sobre Nosotros', url: '/mobile/select-sources', icon: 'information-circle' }
   ];
@@ -48,7 +48,9 @@ export class AppComponent implements OnInit {
 
     // IMPORTANTE -> AL FINAL
     //Cargamos la configuración para las pushes 
-    await this.notificationService.init();
+    setTimeout(async () => {
+      await this.notificationService.init();
+    }, 2000);
   }
 
   ngOnDestroy() {
@@ -57,6 +59,6 @@ export class AppComponent implements OnInit {
 
   // Lógica de validación en una función separada para evitar duplicación
   private loadMenu(url: string): void {
-    this.showMenu = url.includes('events');
+    this.showMenu = url.includes('sources');
   }
 }

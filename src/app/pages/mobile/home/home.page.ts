@@ -22,7 +22,7 @@ export class HomePage implements ViewWillEnter {
     const hasSubscribedSources = (await Preferences.get({key: PreferenceConstants.subscribedSources}))?.value != undefined;
 
     if(hasSubscribedSources) {
-      this.router.navigateByUrl('/mobile/events')
+      this.router.navigateByUrl('/mobile/sources/notifications')
     } else {
       this.loading = false;
     }

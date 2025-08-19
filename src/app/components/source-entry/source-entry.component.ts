@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Source } from 'src/app/model/source.model';
 
 @Component({
@@ -7,20 +7,17 @@ import { Source } from 'src/app/model/source.model';
   styleUrls: ['./source-entry.component.scss'],
   standalone: false
 })
-export class SourceEntryComponent {
+export class SourceEntryComponent  implements OnInit {
 
-  @Input() public source!: Source
-  @Input() public selectable: boolean = true;
-  @Output() updatedElement = new EventEmitter<Source>();
+  @Input() source! : Source;
+  @Input() action : string = 'notifications'
 
   constructor() { }
 
-  onCheckboxChange() {
-    if(!this.selectable) return;
-    
-    this.source.selected = !this.source.selected;
-    this.updatedElement.next(this.source);
-  }
+  ngOnInit() {}
 
+  showDetail() {
+    
+  }
 
 }

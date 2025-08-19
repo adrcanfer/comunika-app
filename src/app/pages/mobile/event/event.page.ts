@@ -23,12 +23,12 @@ export class EventPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    const sourceId = this.activedRouter.snapshot.paramMap.get('sourceId')
-    console.log(sourceId);
+    const eventId = this.activedRouter.snapshot.paramMap.get('eventId')
+    console.log(eventId);
 
-    if(sourceId) {
+    if(eventId) {
       this.spinnerService.showSpinner();
-      this.eventService.getEvent(sourceId)
+      this.eventService.getEvent(eventId)
         .then(e => this.eventDetail = e)
         .finally(() => this.spinnerService.closeSpinner());
     }

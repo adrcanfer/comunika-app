@@ -59,12 +59,13 @@ export class NotificationService {
 
     await PushNotifications.addListener('pushNotificationActionPerformed', async (data: any) => {
       const sourceId = data.notification.data.sourceId;
-      console.log("NOTIFICATION OPENED: " + sourceId);
-      this.router.navigateByUrl('/mobile/event/' + sourceId);
+      const eventId = data.notification.data.eventId;
+      console.log("NOTIFICATION OPENED: " + eventId);
+      this.router.navigateByUrl('/mobile/event/' + eventId);
     });
   }
 
-  // Método para almacenar el token de Firebase
+  // Método para almacenar el token de Firebases
   private async saveToken(token: string) {
     await Preferences.set({ key: PreferenceConstants.pushToken, value: token });
   }

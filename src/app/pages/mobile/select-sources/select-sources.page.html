@@ -22,7 +22,7 @@
     <div class="search-content ion-padding" *ngIf="sourcesToShow">
       <ion-list lines="none">
         <ng-container *ngFor="let s of sourcesToShow">
-          <app-source-entry [source]="s" [selectable]="true" (updatedElement)="updateSourceElement($event)"></app-source-entry>
+          <app-source-item [source]="s" [selectable]="true" (updatedElement)="updateSourceElement($event)"></app-source-item>
         </ng-container>
         <div *ngIf="sourcesToShow.length == 0">No se ha encontrado ninguna fuente por '{{searchKey}}'</div>
       </ion-list>

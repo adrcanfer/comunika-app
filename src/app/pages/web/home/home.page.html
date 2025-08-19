@@ -1,231 +1,101 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
         <div class="header-img">
-            <img src="assets/icon/sololetras.png"/>
+            <img src="assets/icon/sololetras.png" />
+        </div>
+        <div slot="end">                
+            <ion-button color="secondary ion-padding-end" shape="round">Comenzar</ion-button>
         </div>
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-    <header class="gradient-bg py-16 md:py-24 text-center">
-        <div class="container mx-auto px-4">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
-                Conecta. Colabora. <span class="text-indigo-600">Crece.</span>
-            </h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-                La plataforma definitiva para la gestión de comunidades y eventos.
-                Simplifica tu comunicación y fortalece tus lazos.
-            </p>
-            <a href="#" class="inline-block bg-indigo-600 text-white font-bold py-3 px-8 rounded-full text-lg shadow-xl hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105">
-                Empieza Ahora
-            </a>
+<ion-content>
+    <div class="container">
+        <div class="section odd">
+            <div class="brand ion-padding">
+                <img src="assets/icon/icon.png">
+            </div>
+    
+            <div class="slogan ion-padding text-center">La nueva forma de estar informado</div>
+    
+            <div class="text-center ion-padding">
+                <ion-button color="secondary" shape="round">Comenzar</ion-button>
+            </div>
         </div>
-    </header>
+        <!-- Contenido principal de la landing page con las tarjetas -->
+        <div class="section even">
+            <div class="header">
+                <h1>
+                    La plataforma definitiva para el envío de comunicados
+                </h1>
+                <p>
+                    Garantizando que tus mensajes más importantes lleguen a las personas adecuadas, de forma simple y directa.
+                    Es la herramienta perfecta para organizaciones que necesitan una comunicación unidireccional, sin ruido y sin distracciones.
+                </p>
+            </div>
 
-    <section class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-                Nuestras Características Principales
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+            <div class="cards-grid">
+                <!-- Tarjeta para Ayuntamientos -->
+                <div class="card card-blue">
+                    <div class="icon-container">
+                        <ion-icon name="business-outline"></ion-icon>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Gestión de Eventos</h3>
-                    <p class="text-gray-600 text-center">
-                        Crea, gestiona y promueve tus eventos con facilidad, desde talleres hasta grandes conferencias.
+                    <h3>Administraciones públicas</h3>
+                    <p>
+                        Transmite avisos, información de servicios y noticias de última hora sin que se pierdan en el flujo de las redes sociales.
                     </p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.549A9.995 9.995 0 0112 2c4.97 0 9 3.582 9 8z"></path></svg>
+
+                <!-- Tarjeta para Colegios -->
+                <div class="card card-green">
+                    <div class="icon-container">
+                        <ion-icon name="school-outline"></ion-icon>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Mensajería en Tiempo Real</h3>
-                    <p class="text-gray-600 text-center">
-                        Mantén a tu comunidad informada con notificaciones instantáneas y mensajes directos.
+                    <h3>Centros educativos</h3>
+                    <p>
+                        Envía comunicados a padres y estudiantes, notifica eventos o anuncia cierres de forma inmediata y fiable.
                     </p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6m-12 0h6m6 0v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+
+                <!-- Tarjeta para Comunidades de Vecinos -->
+                <div class="card card-yellow">
+                    <div class="icon-container">
+                        <ion-icon name="home-outline"></ion-icon>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Directorio de Miembros</h3>
-                    <p class="text-gray-600 text-center">
-                        Descubre y conecta con otros miembros de tu comunidad de forma sencilla y segura.
+                    <h3>Comunidades de vecinos</h3>
+                    <p>
+                        Mantén a los propietarios informados sobre reuniones, derramas o problemas de mantenimiento con un canal directo y ordenado.
                     </p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                
+                <!-- Tarjeta para Clubes deportivos -->
+                <div class="card card-red">
+                    <div class="icon-container">
+                        <ion-icon name="american-football-outline"></ion-icon>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Contenido Compartido</h3>
-                    <p class="text-gray-600 text-center">
-                        Carga y comparte archivos, documentos y fotos relevantes para tu comunidad.
+                    <h3>Clubes deportivos</h3>
+                    <p>
+                        Envía notificaciones sobre horarios de entrenamientos, cambios de partidos, cancelaciones o eventos especiales de forma clara.
                     </p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm-8 4c0 4.418 4.03 8 9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.549A9.995 9.995 0 0112 2c4.97 0 9 3.582 9 8z"></path></svg>
+                
+                <!-- Tarjeta para Empresas -->
+                <div class="card card-purple">
+                    <div class="icon-container">
+                        <ion-icon name="briefcase-outline"></ion-icon>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Foros y Debates</h3>
-                    <p class="text-gray-600 text-center">
-                        Crea foros de discusión para que los miembros compartan ideas y opiniones de forma segura.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Notificaciones Push</h3>
-                    <p class="text-gray-600 text-center">
-                        Envía alertas y noticias importantes directamente a los dispositivos de los usuarios.
+                    <h3>Empresas</h3>
+                    <p>
+                        Comunica de manera efectiva información interna, novedades o anuncios importantes a tus empleados, asegurando que todos estén al tanto.
                     </p>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="py-16 md:py-24 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-                Nuestros Planes
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                <div class="plan-card">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Free</h3>
-                    <p class="text-gray-600 text-lg mb-4">Para comunidades pequeñas</p>
-                    <div class="text-4xl font-extrabold text-indigo-600 mb-6">
-                        $0<span class="text-lg text-gray-500 font-medium">/mes</span>
-                    </div>
-                    <ul class="text-left w-full mb-8">
-                        <li class="flex items-center mb-3">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Con Anuncios</span>
-                        </li>
-                        <li class="flex items-center mb-3">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Eventos ilimitados</span>
-                        </li>
-                        <li class="flex items-center mb-3">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Directorio de Miembros</span>
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>1GB de almacenamiento</span>
-                        </li>
-                    </ul>
-                    <a href="#" class="bg-gray-200 text-gray-800 font-bold py-3 px-8 rounded-full text-lg w-full text-center hover:bg-gray-300 transition-all duration-300">
-                        Empezar Gratis
-                    </a>
-                </div>
-                <div class="plan-card">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Plus</h3>
-                    <p class="text-gray-600 text-lg mb-4">Para comunidades en crecimiento</p>
-                    <div class="text-4xl font-extrabold text-indigo-600 mb-6">
-                        $9<span class="text-lg text-gray-500 font-medium">/mes</span>
-                    </div>
-                    <ul class="text-left w-full mb-8">
-                        <li class="flex items-center mb-3">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Todas las de Free</span>
-                        </li>
-                        <li class="flex items-center mb-3">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Sin Anuncios</span>
-                        </li>
-                        <li class="flex items-center mb-3">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>10 GB de almacenamiento</span>
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Soporte estándar</span>
-                        </li>
-                    </ul>
-                    <a href="#" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full text-lg w-full text-center shadow-xl hover:bg-indigo-700 transition-all duration-300">
-                        Comprar Plus
-                    </a>
-                </div>
-                <div class="plan-card popular-plan">
-                    <span class="popular-tag">Popular</span>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Pro</h3>
-                    <p class="text-gray-600 text-lg mb-4">Para organizaciones avanzadas</p>
-                    <div class="text-4xl font-extrabold text-indigo-600 mb-6">
-                        $29<span class="text-lg text-gray-500 font-medium">/mes</span>
-                    </div>
-                    <ul class="text-left w-full mb-8">
-                        <li class="flex items-center mb-3">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Todas las de Plus</span>
-                        </li>
-                        <li class="flex items-center mb-3">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Analíticas avanzadas</span>
-                        </li>
-                        <li class="flex items-center mb-3">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>50 GB de almacenamiento</span>
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Soporte prioritario 24/7</span>
-                        </li>
-                    </ul>
-                    <a href="#" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full text-lg w-full text-center shadow-xl hover:bg-indigo-700 transition-all duration-300">
-                        Comprar Pro
-                    </a>
-                </div>
-                <div class="plan-card">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Ultra</h3>
-                    <p class="text-gray-600 text-lg mb-4">Para grandes empresas</p>
-                    <div class="text-4xl font-extrabold text-indigo-600 mb-6">
-                        $99<span class="text-lg text-gray-500 font-medium">/mes</span>
-                    </div>
-                    <ul class="text-left w-full mb-8">
-                        <li class="flex items-center mb-3">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Todas las de Pro</span>
-                        </li>
-                        <li class="flex items-center mb-3">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Almacenamiento ilimitado</span>
-                        </li>
-                        <li class="flex items-center mb-3">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Integraciones personalizadas</span>
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Gestor de cuenta dedicado</span>
-                        </li>
-                    </ul>
-                    <a href="#" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full text-lg w-full text-center shadow-xl hover:bg-indigo-700 transition-all duration-300">
-                        Contacta a Ventas
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-16 md:py-24 bg-gray-100 text-center">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Listo para Conectar?
-            </h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-                Únete a la creciente comunidad de Comunika y transforma la forma en que colaboras.
-            </p>
-            <a href="#" class="inline-block bg-indigo-600 text-white font-bold py-3 px-8 rounded-full text-lg shadow-xl hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105">
-                Regístrate Ahora
-            </a>
-        </div>
-    </section>
-
+    </div>
+    
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 Comunika. Todos los derechos reservados.</p>
+            <p>&copy; 2025 ComuniKa. Todos los derechos reservados.</p>
         </div>
     </footer>
 </ion-content>

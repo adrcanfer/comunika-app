@@ -25,7 +25,6 @@
       font-size: 20px;
   }
   .container {
-      max-width: 1280px;
       margin: 0 auto;
       text-align: center;
   }
@@ -64,7 +63,7 @@
   .card {
       background-color: #FFFFFF;
       border-radius: 0.75rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 6px 4px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
@@ -85,7 +84,7 @@
       border-radius: 9999px;
       margin-bottom: 1rem;
   }
-  .icon-container {
+  .icon-container ion-icon {
       font-size: 2rem;
   }
   .card h3 {
@@ -103,3 +102,64 @@
   .card-yellow .icon-container { background-color: #FEF3C7; color: #F59E0B; }
   .card-red .icon-container { background-color: #FEE2E2; color: #EF4444; }
   .card-purple .icon-container { background-color: #EDE9FE; color: #8B5CF6; }
+
+
+  /* Estilos de las tarjetas de precios */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+@media (min-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+.pricing-card {
+    background-color: #FFFFFF;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px 4px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.pricing-card h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    text-align: left;
+}
+.pricing-features li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+.pricing-features ion-icon {
+    margin-right: 0.5rem;
+    color: #10B981;
+}
+.pricing-price {
+    display: flex;
+    align-items: flex-end;
+    margin-top: auto;
+    margin-bottom: 1.5rem;
+}
+.price-value {
+    font-size: 3rem;
+    font-weight: 700;
+}
+.price-period {
+    font-size: 1rem;
+    color: #4B5563;
+    margin-left: 0.5rem;
+    line-height: 1.5;
+}

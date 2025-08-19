@@ -3,8 +3,8 @@
         <div class="header-img">
             <img src="assets/icon/sololetras.png" />
         </div>
-        <div slot="end">                
-            <ion-button color="secondary ion-padding-end" shape="round">Comenzar</ion-button>
+        <div slot="end" class="ion-padding-end">                
+            <ion-button shape="round">Comenzar</ion-button>
         </div>
     </ion-toolbar>
 </ion-header>
@@ -19,7 +19,7 @@
             <div class="slogan ion-padding text-center">La nueva forma de estar informado</div>
     
             <div class="text-center ion-padding">
-                <ion-button color="secondary" shape="round">Comenzar</ion-button>
+                <ion-button shape="round">Comenzar</ion-button>
             </div>
         </div>
         <!-- Contenido principal de la landing page con las tarjetas -->
@@ -88,6 +88,65 @@
                     <p>
                         Comunica de manera efectiva información interna, novedades o anuncios importantes a tus empleados, asegurando que todos estén al tanto.
                     </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de tarifas -->
+        <div class="section odd">
+            <div class="header">
+                <h1>
+                    Planes de precios
+                </h1>
+                <p>
+                    Elige el plan que mejor se adapte a tus necesidades.
+                </p>
+            </div>
+            
+            <div class="pricing-grid">
+                <!-- Tarjeta de plan gratuito -->
+                <div class="pricing-card">
+                    <h2>Free</h2>
+                    <ul class="pricing-features">
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Con anuncios</li>
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Hasta 1.000 suscriptores</li>
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> 10 notificaciones al mes</li>
+                    </ul>
+                    <div class="pricing-price">
+                        <span class="price-value">0€</span>
+                        <span class="price-period">al mes</span>
+                    </div>
+                    <ion-button expand="block" shape="round">Comenzar</ion-button>
+                </div>
+                
+                <!-- Tarjeta de plan Plus -->
+                <div class="pricing-card">
+                    <h2>Plus</h2>
+                    <ul class="pricing-features">
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Sin anuncios</li>
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Hasta 3.000 suscriptores</li>
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Notificaciones ilimitadas</li>
+                    </ul>
+                    <div class="pricing-price">
+                        <span class="price-value">9,90€</span>
+                        <span class="price-period">al mes</span>
+                    </div>
+                    <ion-button expand="block" color="secondary" shape="round">Elegir plan</ion-button>
+                </div>
+                
+                <!-- Tarjeta de plan Pro -->
+                <div class="pricing-card">
+                    <h2>Pro</h2>
+                    <ul class="pricing-features">
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Sin anuncios</li>
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Suscriptores ilimitados</li>
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Notificaciones ilimitadas</li>
+                    </ul>
+                    <div class="pricing-price">
+                        <span class="price-value">29,90€</span>
+                        <span class="price-period">al mes</span>
+                    </div>
+                    <ion-button expand="block" color="secondary" shape="round">Elegir plan</ion-button>
                 </div>
             </div>
         </div>

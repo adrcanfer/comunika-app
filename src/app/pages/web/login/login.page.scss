@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    justify-content: center;
+}
+
+.main-container {
+    margin: auto;
+}
+
+.brand-container {
+    max-width: 400px;
+    padding: 0px 64px;
+}
+
+.form {
+    width: 300px;
+    padding-bottom: 32px;
+}
+
+.border-right {
+    border-right: 1px solid;
+    border-color: var(--ion-color-light-tint);
+}
+
+.button {
+    width: 180px;
+    margin: auto;
+}
+
+@media (max-width: 780px) {
+    .brand-container {
+        display: none;
+    }
+}

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  showHeader: boolean = false;
 
-  ngOnInit() {
+  @ViewChild('firstContainer', { read: ElementRef }) firstContainer!: ElementRef;
+
+  constructor(
+    private router: Router
+  ) { }
+
+  ngOnInit() {}
+
+  login() {
+    this.router.navigateByUrl("web/login");
+  }
+
+  signup(plan: string) {
+    this.router.navigate(['web/signup'], { queryParams: { plan: plan } });
+  }
+
+  onScroll(event: any) {
+    this.checkTitleVisibility();
+  }
+
+  checkTitleVisibility() {
+    if (this.firstContainer) {
+      const firstContainerBottom = this.firstContainer.nativeElement.getBoundingClientRect().bottom;
+      this.showHeader = firstContainerBottom <= 56
+    }
   }
 
 }

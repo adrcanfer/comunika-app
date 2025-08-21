@@ -35,7 +35,7 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "web": {
               "budgets": [
                 {
                   "type": "initial",
@@ -51,7 +51,28 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.web.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "app": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.app.ts"
                 }
               ],
               "outputHashing": "all"

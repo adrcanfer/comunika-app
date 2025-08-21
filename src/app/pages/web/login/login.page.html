@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="header-img">
+      <img src="assets/icon/sololetras.png" />
+    </div>
+    <div slot="end" class="ion-padding-end">
+      <ion-button shape="round" fill="outline" routerLink="/web/home">Inicio</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="container ion-padding">
+    <div class="row">
+      <div class="col brand-container border-right">
+        <div class="ion-padding">
+          <img src="assets/icon/icon.png">
+        </div>
+  
+        <div class="slogan ion-padding text-center">La nueva forma de estar informado</div>
+      </div>
+      <div class="col main-container ion-padding">
+        <div class="title">Iniciar sesión</div>
+  
+        <form class="form" [formGroup]="form">
+          <div class="form-item ion-padding">
+            <ion-input label="Correo" label-placement="floating" fill="outline" formControlName="email" type="email"
+              mode="md"></ion-input>
+            <div *ngIf="!form.controls['email'].valid && form.controls['email'].touched" class="error ion-padding">Correo
+              inválido</div>
+          </div>
+          <div class="form-item ion-padding">
+            <ion-input label="Contraseña" label-placement="floating" fill="outline" formControlName="password"
+              type="password" mode="md">
+              <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+            </ion-input>
+            <div *ngIf="!form.controls['password'].valid && form.controls['password'].touched" class="error ion-padding">
+              Contraseña inválida</div>
+          </div>
+        </form>
+  
+        <div class="button text-center ion-padding-bottom">
+          <ion-button shape="round" (click)="login()">Continuar</ion-button>
+        </div>
+        <div class="button text-center ion-padding-bottom">
+          <ion-button shape="round" fill="outline" routerLink="/web/signup">Registrarse</ion-button>
+        </div>
+        <div class="retrieve-password text-center ion-padding-bottom">
+          <a routerLink="/web/retrieve-password">¿Has olvidado tu contraseña?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

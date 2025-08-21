@@ -5,14 +5,15 @@ import { platformLayoutGuard } from './guards/platform-layout.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'web/home',
+    redirectTo: 'web',
     pathMatch: 'full',
   },
   {
-    path: 'web/home',
+    path: 'web',
     canActivate: [platformLayoutGuard],
-    loadChildren: () => import('./pages/web/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/web/web.module').then( m => m.WebModule)
   },
+  
   {
     path: 'mobile',
     canActivate: [platformLayoutGuard],

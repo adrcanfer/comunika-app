@@ -41,8 +41,6 @@
     text-align: center;
 }
 
-//===============AUX================
-
 .row {
     display: flex;
     flex-direction: row;
@@ -60,20 +58,50 @@
     flex-direction: column;
     justify-content: center;
     flex-grow: 1;
-}   
+}
+
+//===============AUX================
+
+
+.title {
+    font-size: 36px;
+    padding-bottom: 32px;
+    margin: auto;
+}
+
+.header-img {
+    padding-left: 16px;
+    width: 150px;
+}
+
+.error {
+    color: var(--ion-color-danger)
+}
+
+.slogan {
+    font-style: italic;
+    font-size: 20px;
+}
+
+.input-helper {
+    text-align: justify;
+    font-style: italic;
+    font-size: 14px;
+    padding-left: 8px;
+    padding-top: 8px;
+}
 
 .floatting-button {
-    position: fixed; 
-    bottom: 70px;       
-    left: 0;           
-    right: 0;          
+    position: fixed;
+    bottom: 70px;
+    left: 0;
+    right: 0;
     z-index: 1000;
-    padding: 10px 16px;  
+    padding: 10px 16px;
     display: flex;
     justify-content: center;
-  
+
     & button {
         max-width: 500px;
     }
-  }
-
+}

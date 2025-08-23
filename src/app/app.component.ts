@@ -4,6 +4,8 @@ import { NotificationService } from './services/notification.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { FirebaseService } from './services/firebase.service';
 
 @Component({
   selector: 'app-root',
@@ -12,24 +14,22 @@ import { filter, takeUntil } from 'rxjs/operators';
   standalone: false,
 })
 export class AppComponent implements OnInit {
-  public appPages = [
-    { title: 'Notificaciones', url: '/mobile/sources/events', icon: 'mail' },
-    { title: 'Calendario', url: '/mobile/sources/calendar', icon: 'calendar' },
-    { title: 'Fuentes de Datos', url: '/mobile/select-sources', icon: 'radio' },
-    { title: 'Sobre Nosotros', url: '/mobile/select-sources', icon: 'information-circle' }
-  ];
+  public appPages: any = [];
 
   public showMenu: boolean = true;
   public loading: boolean = false;
   closed$ = new Subject<any>();
 
 
-  
+
   constructor(
-    private spinnerService: SpinnerService, 
+    private spinnerService: SpinnerService,
     private notificationService: NotificationService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private firebaseService: FirebaseService
+  ) {
+    this.loadMenuPages();
+  }
 
   async ngOnInit() {
     //Cargamos la configuración del spinner
@@ -38,27 +38,54 @@ export class AppComponent implements OnInit {
     });
 
     //Cargamos el menu
-    this.loadMenu(this.router.url);
+    this.showMenuIcon(this.router.url);
     this.router.events.pipe(
       filter(e => e instanceof NavigationEnd),
       takeUntil(this.closed$)
     ).subscribe((event: NavigationEnd) => {
-      this.loadMenu(event.url);
+      this.showMenuIcon(event.url);
     });
 
     // IMPORTANTE -> AL FINAL
-    //Cargamos la configuración para las pushes 
-    setTimeout(async () => {
-      await this.notificationService.init();
-    }, 2000);
+    //Cargamos la configuración para las pushes si estamos en modo app
+    if (environment.mode === 'app') {
+      setTimeout(async () => {
+        await this.notificationService.init();
+      }, 2000);
+    }
   }
 
   ngOnDestroy() {
     this.closed$.unsubscribe();
   }
 
-  // Lógica de validación en una función separada para evitar duplicación
-  private loadMenu(url: string): void {
-    this.showMenu = url.includes('sources');
+  async logout() {
+    await this.firebaseService.logout();
+    this.router.navigateByUrl('web/login');
+  }
+
+  private showMenuIcon(url: string): void {
+    if (environment.mode === 'app') {
+      this.showMenu = url.includes('sources');
+    } else {
+      this.showMenu = url.includes('web/my-events')
+        || url.includes('web/my-calendar');
+    }
+  }
+
+  private loadMenuPages() {
+    if (environment.mode === 'app') {
+      this.appPages = [
+        { title: 'Notificaciones', url: '/mobile/sources/events', icon: 'mail' },
+        { title: 'Calendario', url: '/mobile/sources/calendar', icon: 'calendar' },
+        { title: 'Fuentes de Datos', url: '/mobile/select-sources', icon: 'radio' },
+        { title: 'Sobre Nosotros', url: '/mobile/select-sources', icon: 'information-circle' }
+      ];
+    } else {
+      this.appPages = [
+        { title: 'Notificaciones', url: '/web/my-events', icon: 'mail' },
+        { title: 'Calendario', url: '/web/my-calendar', icon: 'calendar' }
+      ];
+    }
   }
 }

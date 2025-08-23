@@ -1,0 +1,78 @@
+name: Android Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout del código
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # 2. Configurar Java
+    - name: Setup java
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    # 3. Configurar Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: 'npm'
+
+    # 4. Instalar Ionic
+    - name: Install Ionic
+      run: npm install -g @ionic/cli
+
+    # 5. Instalar dependencias del frontend
+    - name: Install dependencies
+      run: npm install
+
+    # 6. Compilar el proyecto
+    - name: Build Ionic frontend (Debug)
+      if: ${{ github.event.inputs.branch != 'master' }}
+      run: ionic build --configuration=app
+
+    - name: Build Ionic frontend (Release)
+      if: ${{ github.event.inputs.branch == 'master' }}
+      run: ionic build --prod --configuration=app
+
+    # 7. Copiar cambios en el proyecto Android
+    - name: Sync Android
+      run: ionic capacitor sync android
+
+    # 8. Compilar APK 
+    - name: Generate the Android APK (Debug)
+      if: ${{ github.event.inputs.branch != 'master' }}
+      working-directory: ./android/
+      run: ./gradlew assembleDebug
+
+    - name: Generate the Android APK (Release)
+      if: ${{ github.event.inputs.branch == 'master' }}
+      working-directory: ./android/
+      run: ./gradlew assembleRelease
+
+    # 9. Subir APK
+    - name: Upload artifact (Debug)
+      if: ${{ github.event.inputs.branch != 'master' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-dev
+        path: |
+            ${{ github.workspace }}/android/app/build/outputs/bundle/debug/*.aab
+            ${{ github.workspace }}/android/app/build/outputs/apk/debug/*.apk
+  
+    - name: Upload artifact (Release)
+      if: ${{ github.event.inputs.branch == 'master' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-release
+        path: |
+            ${{ github.workspace }}/android/app/build/outputs/bundle/release/*.aab
+            ${{ github.workspace }}/android/app/build/outputs/apk/release/*.apk

@@ -15,8 +15,8 @@ export class EventService {
   ) { }
 
   // Método encargado de buscar los eventos
-  async getEvents(sourceId: string, lastKey?: string): Promise<Events> {
-    let url = `event?sourceId=${sourceId}`;
+  async getEvents(sourceId: string, limit: number, lastKey?: string): Promise<Events> {
+    let url = `event?sourceId=${sourceId}&limit=${limit}`;
 
     if(lastKey != undefined) {
       url += `&lastKey=${lastKey}`;

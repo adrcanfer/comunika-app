@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { authGuard } from "src/app/guards/auth.guard";
 
 const routes: Routes = [
   {
@@ -22,6 +23,11 @@ const routes: Routes = [
   {
     path: 'retrieve-password',
     loadChildren: () => import('./retrieve-password/retrieve-password.module').then( m => m.RetrievePasswordPageModule)
+  },
+  {
+    path: 'my-events',
+    canActivate: [authGuard],
+    loadChildren: () => import('./events/events.module').then( m => m.EventsPageModule)
   },
   
 ];

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Pair } from '../model/pair.model';
+import { FirebaseService } from './firebase.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class ApiService {
   private baseUrl = environment.baseUrl;
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private firebaseService: FirebaseService
   ) { }
 
   doGet(path: string, queryParams?: Pair[], headers?: Pair[]): Promise<any> {
@@ -58,6 +60,11 @@ export class ApiService {
     let res = new HttpHeaders();
     headers?.forEach(h => res = res.append(h.key, h.value));
     
+    const loggedUser = await this.firebaseService.getLoggedUser();
+    if(loggedUser) {
+      res = res.append("Authorization", `Bearer ${loggedUser}`);
+    }
+
     return res;
   }
 }

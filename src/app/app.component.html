@@ -22,6 +22,12 @@
               </ion-item>
             </ion-menu-toggle>
           }
+          <ion-menu-toggle auto-hide="false">
+            <ion-item lines="none" detail="false" [button]="true" (click)="logout()">
+              <ion-icon aria-hidden="true" slot="start" [ios]="'exit-outline'" [md]="'exit-sharp'"></ion-icon>
+              <ion-label>Cerrar Sesión</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>

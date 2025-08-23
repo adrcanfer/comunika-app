@@ -3,9 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ViewWillEnter } from '@ionic/angular';
 import { Event } from "src/app/model/event.model";
 import { EventService } from 'src/app/services/event.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import { Location } from '@angular/common';
-
 
 @Component({
   selector: 'app-events',
@@ -17,37 +16,35 @@ export class EventsPage implements ViewWillEnter {
 
   events?: Event[]
   endInfiniteScroll = false;
+  loggedUser: boolean = false;
 
+  private sourceId: string = '';
   private lastKey?: string;
-  private sourceId!: string;
 
   constructor(
-    private activedRouter: ActivatedRoute,
-    private spinnerService: SpinnerService,
+    private firebaseService: FirebaseService,
+    private activatedRoute: ActivatedRoute,
     private eventService: EventService,
-    private location: Location
+    private spinnerService: SpinnerService
   ) { }
 
   async ionViewWillEnter() {
-    this.sourceId = this.activedRouter.snapshot.paramMap.get('sourceId') ?? '';
-    console.log(this.sourceId);
+    const sourceId = this.activatedRoute.snapshot.paramMap.get('sourceId');
 
-    if(!this.events) {
-      this.getEvents(true, true);
+    if(sourceId) {
+      this.sourceId = sourceId;
+      this.loggedUser = false;
+    } else {
+      const uuid = await this.firebaseService.getLoggedUserId();
+      this.sourceId = uuid!;
+      this.loggedUser = true;
     }
+
+    this.getEvents(true, true);
   }
 
   loadNextContent(event?: any) {
     this.getEvents(false, false, event);
-  }
-
-  refreshContent(event: any) {
-    this.lastKey = undefined;
-    this.getEvents(false, true, event);
-  }
-
-  back() {
-    this.location.back();
   }
 
   private getEvents(first: boolean = true, refresh: boolean = false, event?: any) {

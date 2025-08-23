@@ -4,8 +4,8 @@ export interface Source {
     email: string;
     icon?: string;
     public: boolean;
-    plan: string; //'free'
-    lastUpdate: number;
+    plan?: string; //'free'
+    lastUpdate?: number;
 
     //Aux
     selected?: boolean;

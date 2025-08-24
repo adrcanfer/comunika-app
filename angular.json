@@ -84,9 +84,6 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
-            },
-            "ci": {
-              "progress": false
             }
           },
           "defaultConfiguration": "production"

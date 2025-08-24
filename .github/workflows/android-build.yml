@@ -35,13 +35,8 @@ jobs:
       run: npm install
 
     # 6. Compilar el proyecto
-    - name: Build Ionic frontend (Debug)
-      if: ${{ github.event.inputs.branch != 'master' }}
+    - name: Build Ionic frontend
       run: ionic build --configuration=app
-
-    - name: Build Ionic frontend (Release)
-      if: ${{ github.event.inputs.branch == 'master' }}
-      run: ionic build --prod --configuration=app
 
     # 7. Copiar cambios en el proyecto Android
     - name: Sync Android

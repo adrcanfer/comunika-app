@@ -42,4 +42,4 @@ jobs:
     # 7. Sync files
     - name: Copying web files to AWS
       run: |
-        aws s3 sync ./www/ s3://comunika-web --exact-timestamps
+        aws s3 sync ./www/ s3://www.comunikame.es --exact-timestamps

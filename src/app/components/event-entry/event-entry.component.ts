@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Event } from 'src/app/model/event.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-event-entry',
@@ -20,7 +21,12 @@ export class EventEntryComponent  implements OnInit {
 
   showDetail() {
     this.event.read++;
-    this.router.navigateByUrl(`/mobile/event/${this.event.id}`);
+
+    if(environment.mode === 'app') {
+      this.router.navigateByUrl(`/mobile/event/${this.event.id}`);
+    } else {
+      this.router.navigateByUrl(`/web/event/${this.event.id}`);
+    }
   }
 
   stripHtmlTagsAndExtractText(htmlString: string) {

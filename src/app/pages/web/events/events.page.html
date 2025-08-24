@@ -14,8 +14,8 @@
     <div class="title text-center ion-padding">Notificaciones</div>
 
     <div class="events ion-padding">
-      <div class="create-btn text-end ion-padding-bottom">
-        <ion-button color="secondary" shape="round">Nuevo</ion-button>
+      <div *ngIf="loggedUser" class="create-btn text-end ion-padding-bottom">
+        <ion-button color="secondary" shape="round" routerLink="/web/event-editor">Nuevo</ion-button>
       </div>
 
       <div class="text-center ion-padding" *ngIf="loggedUser && events && events.length === 0">Aún no has creado ningún evento</div>
@@ -28,7 +28,7 @@
       <ion-infinite-scroll (ionInfinite)="loadNextContent($event)" threshold="100px" [disabled]="endInfiniteScroll">
         <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
       </ion-infinite-scroll>
-      
+
     </div>
   </div>
 </ion-content>

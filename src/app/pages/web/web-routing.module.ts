@@ -29,6 +29,24 @@ const routes: Routes = [
     canActivate: [authGuard],
     loadChildren: () => import('./events/events.module').then( m => m.EventsPageModule)
   },
+  {
+    path: 'events/:sourceId',
+    loadChildren: () => import('./events/events.module').then( m => m.EventsPageModule)
+  },
+  {
+    path: 'event-editor',
+    canActivate: [authGuard],
+    loadChildren: () => import('./event-editor/event-editor.module').then( m => m.EventEditorPageModule)
+  },
+  {
+    path: 'event-editor/:eventId',
+    canActivate: [authGuard],
+    loadChildren: () => import('./event-editor/event-editor.module').then( m => m.EventEditorPageModule)
+  },
+  {
+    path: 'event/:eventId',
+    loadChildren: () => import('./event/event.module').then( m => m.EventPageModule)
+  },
   
 ];
 

@@ -86,13 +86,16 @@
               "namedChunks": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "app"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": {
-              "buildTarget": "app:build:production"
+            "app": {
+              "buildTarget": "app:build:app"
+            },
+            "web": {
+              "buildTarget": "app:build:web"
             },
             "development": {
               "buildTarget": "app:build:development"

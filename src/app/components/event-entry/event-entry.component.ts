@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Event } from 'src/app/model/event.model';
 import { environment } from 'src/environments/environment';
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./event-entry.component.scss'],
   standalone: false
 })
-export class EventEntryComponent  implements OnInit {
+export class EventEntryComponent {
 
   @Input() event!: Event;
 
@@ -17,10 +17,8 @@ export class EventEntryComponent  implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {}
-
   showDetail() {
-    this.event.read++;
+    this.event.read!++;
 
     if(environment.mode === 'app') {
       this.router.navigateByUrl(`/mobile/event/${this.event.id}`);

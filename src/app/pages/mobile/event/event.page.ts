@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ViewWillEnter } from '@ionic/angular';
 import { Event } from 'src/app/model/event.model';
 import { EventService } from 'src/app/services/event.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
@@ -11,7 +12,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
   styleUrls: ['./event.page.scss'],
   standalone: false
 })
-export class EventPage implements OnInit {
+export class EventPage implements ViewWillEnter {
 
   eventDetail?: Event;
 
@@ -22,7 +23,7 @@ export class EventPage implements OnInit {
     private location: Location
   ) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     const eventId = this.activedRouter.snapshot.paramMap.get('eventId')
     console.log(eventId);
 

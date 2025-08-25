@@ -63,7 +63,17 @@
     justify-content: center;
     flex-grow: 1;
 }
+.margin-left {
+    margin-left: 16px;
+}
+.margin-right {
+    margin-right: 16px;
+}
 
+.fit-container {
+    max-width: 700px;
+    margin: auto;
+}
 //===============AUX================
 ion-card {
     border-radius: 20px;

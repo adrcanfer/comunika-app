@@ -1,12 +1,16 @@
 import { Source } from "./source.model";
 
 export interface Event {
-    id: string;
+    id?: string;
     title: string;
     content: string;
-    read: number;
-    lastUpdate: number;
+    showStats: boolean;
+    read?: number;
+    lastUpdate?: number;
+
+    attachments: string[];
 
     //Aux
-    source: Source;
+    source?: Source;
 }
+

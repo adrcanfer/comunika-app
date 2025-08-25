@@ -1,5 +1,5 @@
-<ion-card (click)="showDetail()">
-  <ion-card-header>
+<ion-card>
+  <ion-card-header (click)="showDetail()">
     <ion-card-title color="primary">
       <div class="truncated-title">
         {{event.title}}        
@@ -7,7 +7,7 @@
     </ion-card-title>
   </ion-card-header>
 
-  <ion-card-content>
+  <ion-card-content (click)="showDetail()">
     <div class="truncated-content">
       {{stripHtmlTagsAndExtractText(event.content)}}    
     </div>

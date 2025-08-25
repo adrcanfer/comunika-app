@@ -8,10 +8,7 @@
       <ion-content>
         <ion-list id="inbox-list">
           <div class="brand ion-padding">
-            <img class="ion-padding" src="assets/icon/sololetras.png"/>
-          </div>
-          <div class="brand-url text-center ion-padding-bottom">
-            <a href="https://www.comunika.es">www.comunika.es</a>
+            <img class="ion-padding" src="assets/icon/brandname.png"/>
           </div>
 
           @for (p of appPages; track p; let i = $index) {
@@ -29,6 +26,9 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
+        <div class="brand-url text-center ion-padding-top">
+          <a href="https://www.comunikame.es" target="_blank">www.comunikame.es</a>
+        </div>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

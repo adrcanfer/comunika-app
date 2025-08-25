@@ -1,13 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>event</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div class="header-img">
+      <img src="assets/icon/brandname.png" />
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">event</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="container fit-container ion-padding" *ngIf="event">
+    <div class="ion-padding">
+      <div class="create-btn text-end ion-padding-bottom">
+        <ion-button class="margin-right" color="secondary" fill="outline" shape="round" (click)="back()">Volver</ion-button>
+        <ion-button *ngIf="ownerMode" shape="round" class="ion-padding-end" color="secondary" (click)="edit()">
+          <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="ownerMode" shape="round" class="ion-padding-end" color="danger" (click)="delete()">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div class="title text-center ion-padding">
+        {{event.title}}
+      </div>
+
+      <div class="notification-content" [innerHtml]="event.content"></div>
+
+      <div class="attachments" *ngIf="event.attachments.length > 0">
+        Attachments
+      </div>
+    </div>
+  </div>
+  <div class="footer fit-container">
+    <app-event-footer *ngIf="event" [event]="event"></app-event-footer>
+  </div>
 </ion-content>

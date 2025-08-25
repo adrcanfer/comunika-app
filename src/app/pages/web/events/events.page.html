@@ -4,13 +4,13 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <div class="header-img">
-      <img src="assets/icon/sololetras.png" />
+      <img src="assets/icon/brandname.png" />
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="container ion-padding">
+  <div class="container fit-container ion-padding">
     <div class="title text-center ion-padding">Notificaciones</div>
 
     <div class="events ion-padding">
@@ -28,7 +28,6 @@
       <ion-infinite-scroll (ionInfinite)="loadNextContent($event)" threshold="100px" [disabled]="endInfiniteScroll">
         <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
       </ion-infinite-scroll>
-
     </div>
   </div>
 </ion-content>

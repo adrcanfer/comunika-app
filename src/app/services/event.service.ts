@@ -25,9 +25,28 @@ export class EventService {
     return this.apiService.doGet(url);
   }
 
-  async getEvent(id: string): Promise<Event> {
-    const url = `event/${id}`;
+  //Obtenemos un evento
+  async getEvent(id: string, reading: boolean = true): Promise<Event> {
+    const url = `event/${id}?reading=${reading}`;
     return this.apiService.doGet(url);
+  }
+
+  //Creamos un nuevo evento
+  async postEvent(event: Event): Promise<Event> {
+    const url = `event`;
+    return this.apiService.doPost(url, event);
+  }
+
+  //Actualizamos un evento
+  async putEvent(event: Event): Promise<Event> {
+    const url = `event/${event.id}`;
+    return this.apiService.doPut(url, event);
+  }
+
+  //Eliminamos un evento
+  async deleteEvent(id: string): Promise<void> {
+    const url = `event/${id}`;
+    return this.apiService.doDelete(url);
   }
 
 }

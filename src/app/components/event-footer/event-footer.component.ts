@@ -1,5 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Event } from 'src/app/model/event.model';
+import { AlertService } from 'src/app/services/alert.service';
+import { EventService } from 'src/app/services/event.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-event-footer',
@@ -10,9 +15,15 @@ import { Event } from 'src/app/model/event.model';
 export class EventFooterComponent  implements OnInit {
 
   @Input() event!: Event
+  ownerMode: boolean = false;
 
-  constructor() { }
+  constructor(
+    private firebaseService: FirebaseService,
+  ) { }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    const owner = await this.firebaseService.getLoggedUserId();
+    this.ownerMode = owner != undefined && this.event.source?.id == owner;
+  }
 
 }

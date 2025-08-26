@@ -1,0 +1,63 @@
+.miniature {
+
+    border: 1px solid var(--ion-color-light-shade);
+    border-radius: 8px;
+
+    & img {
+        height: 150px;
+        width: auto;
+        max-width: none;
+    }
+}
+
+
+.miniature-container {
+    position: relative;
+    display: flex;
+    border: 1px solid var(--ion-color-light-shade);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Style for the image */
+  .miniature-image {
+    height: 150px;
+    width: auto;
+    max-width: none;
+  }
+
+  /* Styles for the delete button container, hidden by default */
+  .delete-button-container {
+    position: absolute;
+    top: 8px; /* Equivalent to top-2 */
+    right: 8px; /* Equivalent to right-2 */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Show the delete button container on hover */
+  .miniature-container:hover .delete-button-container {
+    opacity: 1;
+  }
+
+  /* Styles for the button itself */
+  .delete-button {
+    color: white;
+    padding: 4px; /* Equivalent to p-1 */
+    border-radius: 9999px; /* Equivalent to rounded-full */
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Equivalent to shadow-md */
+    transition: background-color 0.3s ease;
+  }
+
+
+  .delete-button:focus {
+    outline: none;
+  }
+
+  .icon {
+    height: 16px; 
+    width: 16px; 
+  }

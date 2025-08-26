@@ -42,7 +42,12 @@ export class EventEntryComponent {
     // Reemplaza cualquier etiqueta HTML (<...>) con un string vacío.
     cleanedString = cleanedString.replace(/<[^>]*>/g, '');
   
-    // Paso 3: Limpiar espacios extra (opcional pero recomendado).
+    // Paso 3: Eliminar el carácter de espacio no rompible (&nbsp;).
+    // El &#160; es la representación decimal del carácter.
+    cleanedString = cleanedString.replace(/&nbsp;/gi, '');
+    cleanedString = cleanedString.replace(/&#160;/gi, '');
+  
+    // Paso 4: Limpiar espacios extra (opcional pero recomendado).
     // Esto elimina múltiples espacios en blanco, saltos de línea, etc.
     cleanedString = cleanedString.replace(/\s+/g, ' ').trim();
   

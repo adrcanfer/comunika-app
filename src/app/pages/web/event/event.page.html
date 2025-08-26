@@ -13,7 +13,7 @@
   <div class="container fit-container ion-padding" *ngIf="event">
     <div class="ion-padding">
       <div class="create-btn text-end ion-padding-bottom">
-        <ion-button class="margin-right" color="secondary" fill="outline" shape="round" (click)="back()">Volver</ion-button>
+        <ion-button class="margin-right" fill="outline" shape="round" (click)="back()">Volver</ion-button>
         <ion-button *ngIf="ownerMode" shape="round" class="ion-padding-end" color="secondary" (click)="edit()">
           <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
         </ion-button>
@@ -28,8 +28,8 @@
 
       <div class="notification-content" [innerHtml]="event.content"></div>
 
-      <div class="attachments" *ngIf="event.attachments.length > 0">
-        Attachments
+      <div class="attachments row" *ngIf="event.attachments.length > 0">
+        <app-img-miniature class="attachment ion-padding" *ngFor="let a of event.attachments" [src]="a"></app-img-miniature>
       </div>
     </div>
   </div>

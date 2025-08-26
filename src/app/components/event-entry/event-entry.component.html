@@ -8,9 +8,7 @@
   </ion-card-header>
 
   <ion-card-content (click)="showDetail()">
-    <div class="truncated-content">
-      {{stripHtmlTagsAndExtractText(event.content)}}    
-    </div>
+    <div class="truncated-content" [innerHtml]="stripHtmlTagsAndExtractText(event.content)"></div>
   </ion-card-content>
   <app-event-footer [event]="event"></app-event-footer>
 </ion-card>

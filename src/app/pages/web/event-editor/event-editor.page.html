@@ -18,7 +18,7 @@
 
     <div class="ion-padding">
       <div class="create-btn text-end ion-padding-bottom">
-        <ion-button class="margin-right" color="secondary" fill="outline" shape="round" routerLink="/web/my-events">Volver</ion-button>
+        <ion-button class="margin-right" fill="outline" shape="round" (click)="back()">Volver</ion-button>
         <ion-button color="secondary" shape="round" (click)="save()">
           <ng-container *ngIf="!eventId">Crear</ng-container>
           <ng-container *ngIf="eventId">Guardar</ng-container>
@@ -28,7 +28,8 @@
       <div class="editor">
         <form class="form" [formGroup]="form">
           <div class="form-item ion-padding">
-            <ion-input label="Título" label-placement="floating" fill="outline" formControlName="title" type="text"
+            <div class="form-item-title">Título</div>
+            <ion-input fill="outline" formControlName="title" type="text"
               errorText="Título inválido" mode="md"></ion-input>
           </div>
 
@@ -38,11 +39,31 @@
               Mostrar visualizaciones
             </ion-toggle>
           </div>
-          <div class="form-item ion-padding">
-            <ion-textarea label="Contenido" label-placement="floating" fill="outline" rows="10" formControlName="content" type="text"
-              errorText="Contenido inválido" mode="md"></ion-textarea>
+          <div class="text-editor ion-padding">
+            <div class="form-item-title">Contenido</div>
+            <editor licenseKey="gpl"
+              [init]="editorConfig"
+              formControlName="content"
+            ></editor>
+            <div *ngIf="!form.controls['content'].valid && form.controls['content'].touched" class="error ion-padding">Contenido inválido</div>
           </div>
-          
+          <div class="attachments ion-padding">
+            <div class="row attachments-header">
+              <div class="form-item-title main-col">Adjuntos</div>
+              <div>
+                <ion-button shape="round" class="ion-padding-end" color="secondary" (click)="attachemntInput.click()">
+                  <ion-icon slot="icon-only" name="attach-outline"></ion-icon>
+                </ion-button>
+              </div>
+              <input hidden #attachemntInput type="file"  accept="image/*" (change)="addAttachment($event)" multiple/>
+            </div>
+            <div class="attachments-content ion-padding">
+              <div class="row overflow" *ngIf="attachments.length > 0">
+                <app-img-miniature class="attachment ion-padding" *ngFor="let a of attachments" [src]="a" [editMode]="true" (action)="handleAction($event, a)"></app-img-miniature>
+              </div>
+              <div *ngIf="attachments.length === 0" class="text-center">No hay ningún adjunto</div>
+            </div>
+          </div>
         </form>
       </div>
     </div>

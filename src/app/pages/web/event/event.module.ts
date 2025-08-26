@@ -15,6 +15,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FormsModule,
     IonicModule,
     EventPageRoutingModule,
+    ComponentsModule,
     ComponentsModule
   ],
   declarations: [EventPage]

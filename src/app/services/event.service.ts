@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Events } from '../model/events.model';
 import { Event } from '../model/event.model';
+import { Events } from '../model/events.model';
 import { ApiService } from './api.service';
-import { SubscriptionService } from './subscription.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +9,7 @@ import { SubscriptionService } from './subscription.service';
 export class EventService {
 
   constructor(
-    private apiService: ApiService,
-    private subscriptionService: SubscriptionService
+    private apiService: ApiService
   ) { }
 
   // Método encargado de buscar los eventos

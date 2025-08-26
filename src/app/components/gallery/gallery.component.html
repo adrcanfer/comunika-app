@@ -1,0 +1,26 @@
+<div class="row" [ngClass]="{ 'edit-mode': editMode, 'view-mode': !editMode }" *ngIf="attachments.length > 0">
+  <app-img-miniature class="attachment ion-padding" *ngFor="let a of attachments" [src]="a" [editMode]="editMode" (action)="handleAction($event, a)"></app-img-miniature>
+</div>
+
+<!-- El Modal del Visor de Imagenes -->
+<div class="modal-overlay" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <!-- Boton de cierre -->
+    <button (click)="closeModal()" class="close-button">
+      &times;
+    </button>
+    
+    <!-- Imagen principal -->
+    <img class="modal-image" [src]="currentImage">
+
+    <!-- Boton anterior -->
+    <button (click)="showPrev()" class="nav-button prev-button">
+      &#10094;
+    </button>
+    
+    <!-- Boton siguiente -->
+    <button (click)="showNext()" class="nav-button next-button">
+      &#10095;
+    </button>
+  </div>
+</div>

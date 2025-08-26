@@ -28,8 +28,8 @@
 
       <div class="notification-content" [innerHtml]="event.content"></div>
 
-      <div class="attachments row" *ngIf="event.attachments.length > 0">
-        <app-img-miniature class="attachment ion-padding" *ngFor="let a of event.attachments" [src]="a"></app-img-miniature>
+      <div *ngIf="event.attachments.length > 0">
+        <app-gallery [attachments]="event.attachments" [editMode]="false"></app-gallery>
       </div>
     </div>
   </div>

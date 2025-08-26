@@ -1,9 +1,6 @@
 <div class="miniature-container">
   <!-- Image element -->
-  <img 
-    [src]="src" 
-    class="miniature-image"
-  >
+  <img [src]="src" class="miniature-image"  (click)="emitAction('view')">
 
   <div *ngIf="editMode" class="delete-button-container">
     <button class="delete-button" (click)="emitAction('delete')">

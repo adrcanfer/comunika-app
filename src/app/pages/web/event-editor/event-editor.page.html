@@ -58,8 +58,8 @@
               <input hidden #attachemntInput type="file"  accept="image/*" (change)="addAttachment($event)" multiple/>
             </div>
             <div class="attachments-content ion-padding">
-              <div class="row overflow" *ngIf="attachments.length > 0">
-                <app-img-miniature class="attachment ion-padding" *ngFor="let a of attachments" [src]="a" [editMode]="true" (action)="handleAction($event, a)"></app-img-miniature>
+              <div *ngIf="attachments.length > 0">
+                <app-gallery [attachments]="attachments" (action)="handleAction($event.action, $event.url)" [editMode]="true"></app-gallery>
               </div>
               <div *ngIf="attachments.length === 0" class="text-center">No hay ningún adjunto</div>
             </div>

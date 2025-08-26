@@ -1,3 +1,7 @@
+.container {
+    padding-bottom: 120px;
+}
+
 .event-title {
     color: var(--ion-color-primary);
     font-size: 22px;
@@ -6,7 +10,6 @@
 
 .event-description {
     text-align: justify;
-    padding-bottom: 120px;
 }
 
 .footer {

@@ -13,6 +13,9 @@
   <div class="container ion-padding" *ngIf="eventDetail">
     <div class="event-title ion-padding">{{eventDetail.title}}</div>
     <div class="event-description ion-padding" [innerHtml]="eventDetail.content"></div>
+    <div *ngIf="eventDetail.attachments.length > 0" class="event-attachments">
+      <app-gallery [attachments]="eventDetail.attachments" [editMode]="false"></app-gallery>
+    </div>
   </div>
   <div class="footer">
     <app-event-footer *ngIf="eventDetail" [event]="eventDetail"></app-event-footer>

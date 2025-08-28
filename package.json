@@ -44,6 +44,7 @@
     "@capacitor/push-notifications": "^7.0.2",
     "@capacitor/share": "^7.0.2",
     "@capacitor/status-bar": "7.0.2",
+    "@capawesome/capacitor-android-edge-to-edge-support": "^7.2.3",
     "@ionic/angular": "^8.0.0",
     "@tinymce/tinymce-angular": "^9.1.0",
     "firebase": "^12.1.0",

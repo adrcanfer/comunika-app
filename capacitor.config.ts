@@ -10,6 +10,9 @@ const config: CapacitorConfig = {
     },
     Media: {
       androidGalleryMode: true
+    },
+    EdgeToEdge: {
+      backgroundColor: "#1C418C"
     }
   }
 };

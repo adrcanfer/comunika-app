@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UploadFileRequest } from '../model/upload-file-request.model';
+import { S3FileContent } from '../model/s3-file-content.model';
 import { ApiService } from './api.service';
 import { UploadFileResponse } from '../model/upload-file-response.model';
 
@@ -10,7 +10,12 @@ export class FileService {
 
   constructor(private apiService: ApiService) { }
 
-  uploadFile(uploadFileRequest: UploadFileRequest): Promise<UploadFileResponse> {
+  getFile(key: string): Promise<S3FileContent> {
+    const url = `file/${key}`;
+    return this.apiService.doGet(url);
+  }
+  
+  uploadFile(uploadFileRequest: S3FileContent): Promise<UploadFileResponse> {
     const url = `file`;
     return this.apiService.doPost(url, uploadFileRequest);
   }

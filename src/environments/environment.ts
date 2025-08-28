@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   baseUrl: 'https://gdyc25y85c.execute-api.eu-west-1.amazonaws.com/dev/',
-  mode: 'web'
+  //mode: 'web'
+  mode: 'app'
 };
 
 /*

@@ -4,6 +4,12 @@ PODS:
   - CapacitorApp (7.0.2):
     - Capacitor
   - CapacitorCordova (7.4.2)
+  - CapacitorFilesystem (7.1.4):
+    - Capacitor
+    - IONFilesystemLib (~> 1.0.1)
+  - CapacitorFileTransfer (1.0.4):
+    - Capacitor
+    - IONFileTransferLib (~> 1.0)
   - CapacitorHaptics (7.0.2):
     - Capacitor
   - CapacitorKeyboard (7.0.2):
@@ -11,6 +17,8 @@ PODS:
   - CapacitorPreferences (7.0.2):
     - Capacitor
   - CapacitorPushNotifications (7.0.2):
+    - Capacitor
+  - CapacitorShare (7.0.2):
     - Capacitor
   - CapacitorStatusBar (7.0.2):
     - Capacitor
@@ -61,6 +69,8 @@ PODS:
   - GoogleUtilities/UserDefaults (8.0.2):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
+  - IONFilesystemLib (1.0.1)
+  - IONFileTransferLib (1.0.1)
   - nanopb (3.30910.0):
     - nanopb/decode (= 3.30910.0)
     - nanopb/encode (= 3.30910.0)
@@ -72,10 +82,13 @@ DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorFilesystem (from `../../node_modules/@capacitor/filesystem`)"
+  - "CapacitorFileTransfer (from `../../node_modules/@capacitor/file-transfer`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
   - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
   - "CapacitorPushNotifications (from `../../node_modules/@capacitor/push-notifications`)"
+  - "CapacitorShare (from `../../node_modules/@capacitor/share`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
   - FirebaseMessaging
 
@@ -87,6 +100,8 @@ SPEC REPOS:
     - FirebaseMessaging
     - GoogleDataTransport
     - GoogleUtilities
+    - IONFilesystemLib
+    - IONFileTransferLib
     - nanopb
     - PromisesObjC
 
@@ -97,6 +112,10 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/app"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
+  CapacitorFilesystem:
+    :path: "../../node_modules/@capacitor/filesystem"
+  CapacitorFileTransfer:
+    :path: "../../node_modules/@capacitor/file-transfer"
   CapacitorHaptics:
     :path: "../../node_modules/@capacitor/haptics"
   CapacitorKeyboard:
@@ -105,6 +124,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/preferences"
   CapacitorPushNotifications:
     :path: "../../node_modules/@capacitor/push-notifications"
+  CapacitorShare:
+    :path: "../../node_modules/@capacitor/share"
   CapacitorStatusBar:
     :path: "../../node_modules/@capacitor/status-bar"
 
@@ -112,10 +133,13 @@ SPEC CHECKSUMS:
   Capacitor: 156d98aba46ec01dde72c4bbb92fa626837cad29
   CapacitorApp: efc1e9748a8ea5d3e789cd82a4f451341cc7ac93
   CapacitorCordova: 5e58d04631bc5094894ac106e2bf1da18a9e6151
+  CapacitorFilesystem: ac0a386949ed6c295a3dffa129ecd26b881ae5be
+  CapacitorFileTransfer: 6b4dd29825539c77bb4fb6c1bcea25daf26444d0
   CapacitorHaptics: 09d96bcb5a2b74ede8fd039b4cdf58fc43dcacf1
   CapacitorKeyboard: 056bbe3711830ccb782f1705a8ad183b27b6c51e
   CapacitorPreferences: b583b5deb74e564c35968189d25d32c0fd41200d
   CapacitorPushNotifications: 6ffcf5df95f17d71a1b02893549bc4727f80540c
+  CapacitorShare: 051c3ceee0ddf3bb54574851a622bbb317eed5bd
   CapacitorStatusBar: 5526833b87fa9c96a2a90c1322bb1f663c04505f
   FirebaseCore: 48b0dd707581cf9c1a1220da68223fb0a562afaa
   FirebaseCoreInternal: d98ab91e2d80a56d7b246856a8885443b302c0c2
@@ -123,9 +147,11 @@ SPEC CHECKSUMS:
   FirebaseMessaging: e1aca1fcc23e8b9eddb0e33f375ff90944623021
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
+  IONFilesystemLib: 89258b8e3e85465da93127d25d7ce37f977e8a6f
+  IONFileTransferLib: b268561ab0ba7f386eea228c4986b55ba0146ca9
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
 
-PODFILE CHECKSUM: ba57d04a1e64474864ded7ee353d2e5c28465b24
+PODFILE CHECKSUM: 1c6eb355bbd4ed0bd69934d57ec09a313c3c49c7
 
 COCOAPODS: 1.15.2

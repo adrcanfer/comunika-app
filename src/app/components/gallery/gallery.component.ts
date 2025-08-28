@@ -1,4 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Capacitor } from '@capacitor/core';
+import { Directory, Filesystem } from '@capacitor/filesystem';
+import { Share } from '@capacitor/share';
+import { S3FileContent } from 'src/app/model/s3-file-content.model';
+import { AlertService } from 'src/app/services/alert.service';
+import { FileService } from 'src/app/services/file.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,7 +25,12 @@ export class GalleryComponent implements OnInit {
   currentImageIndex: number = 0;
   currentImage?: string;
 
-  constructor() { }
+  constructor(
+    private spinnerService: SpinnerService,
+    private fileService: FileService,
+    private alertService: AlertService,
+    private toastService: ToastService
+  ) { }
 
   ngOnInit() { }
 
@@ -33,29 +46,25 @@ export class GalleryComponent implements OnInit {
   }
 
   downloadImage() {
-    if (environment.mode === 'web') {
-      fetch(this.currentImage!)
-      .then(res => res.blob())
-      .then(blob => {
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
+    const urlParts = this.currentImage!.split('/');
+    const key = urlParts[urlParts.length - 1];
 
-        // sacar extensión de forma segura
-        const extension = this.currentImage!.split('.').pop() || 'png';
-        link.download = `comunikame-${this.getFormattedCurrentDate()}.${extension}`;
-        
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    this.spinnerService.showSpinner();
+    this.fileService.getFile(key)
+      .then(async (res: S3FileContent) => {
+        const { name, contentType, content } = res;
+        const base64Data = content.split(',')[1];
 
-        // liberar memoria
-        window.URL.revokeObjectURL(url);
+        if (environment.mode === 'web') {
+          this.saveImgInWeb(name, base64Data, contentType);
+        } else {
+          await this.saveImgInApp(name, base64Data, contentType);
+        }
       })
-      .catch(err => {
-        console.error('Error al descargar la imagen:', err);
-      });
-    }
+      .catch(e => {
+        this.alertService.showAlert("Error", "Se ha producido un error descargando el adjunto. Inténtelo de nuevo más tarde.")
+      }).finally(() => this.spinnerService.closeSpinner());
+
   }
 
   showNext(): void {
@@ -96,6 +105,75 @@ export class GalleryComponent implements OnInit {
     // Concatenar todos los componentes
     const formattedDateTime = `${year}${month}${day}${hours}${minutes}${seconds}`;
     return formattedDateTime;
+  }
+
+  private saveImgInWeb(name: string, base64Data: string, contentType: string) {
+    // Convertir base64 → Blob
+    const byteCharacters = atob(base64Data);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: contentType });
+
+    // Crear un link oculto para forzar la descarga
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = this.getFileName(name);  // nombre que vino de la API
+    document.body.appendChild(a);
+    a.click();
+
+    // Limpiar
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }
+
+  private async saveImgInApp(name: string, base64Data: string, contentType: string) {
+    try {
+      let result;
+
+      if (Capacitor.getPlatform() === 'android') {
+        // Guardar en Downloads
+        result = await Filesystem.writeFile({
+          path: `Pictures/ComuniKame/${this.getFileName(name)}`,
+          data: base64Data,
+          directory: Directory.ExternalStorage,
+          recursive: true
+        });
+
+        console.log('Archivo guardado en:', result.uri);
+        this.toastService.showToast("Se ha guardado exitosamente")
+
+      } else {
+        // En iOS lo guardamos en sandbox
+        result = await Filesystem.writeFile({
+          path: this.getFileName(name),
+          data: base64Data,
+          directory: Directory.External,
+        });
+        console.log('Archivo guardado en sandbox iOS:', result.uri);
+
+        // En ambos casos abrimos un "share dialog" para que el usuario pueda verlo/exportarlo
+        await Share.share({
+          title: 'Archivo descargado',
+          text: 'Aquí tienes tu archivo',
+          url: result.uri,
+          dialogTitle: 'Compartir archivo'
+
+        });
+      }
+
+    } catch (err) {
+      console.error('Error guardando fichero', err);
+      this.alertService.showAlert("Error", "Se ha producido un error guardando el fichero. Inténtelo de nuevo más tarde.");
+    }
+  }
+
+  private getFileName(name: string) {
+    const extension = name.split(".")[1];
+    return `ComuniKame-${this.getFormattedCurrentDate()}.${extension}`;
   }
 
 }

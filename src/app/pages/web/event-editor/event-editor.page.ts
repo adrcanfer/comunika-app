@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ViewWillEnter } from '@ionic/angular';
 import { EditorComponent } from '@tinymce/tinymce-angular';
 import { Event } from 'src/app/model/event.model';
-import { UploadFileRequest } from 'src/app/model/upload-file-request.model';
+import { S3FileContent } from 'src/app/model/s3-file-content.model';
 import { UploadFileResponse } from 'src/app/model/upload-file-response.model';
 import { AlertService } from 'src/app/services/alert.service';
 import { EventService } from 'src/app/services/event.service';
@@ -115,7 +115,7 @@ export class EventEditorPage implements ViewWillEnter {
       const reader = new FileReader();
 
       reader.onloadend = () => {
-        const uploadFileRequest: UploadFileRequest = {
+        const uploadFileRequest: S3FileContent = {
           name: f.name,
           content: reader.result as string,
           contentType: f.type
@@ -156,7 +156,7 @@ export class EventEditorPage implements ViewWillEnter {
       .finally(() => this.spinnerService.closeSpinner());
   }
 
-  private uploadFile(uploadFileRequest: UploadFileRequest) {
+  private uploadFile(uploadFileRequest: S3FileContent) {
     this.fileService.uploadFile(uploadFileRequest).then(
       (data: UploadFileResponse) => {
         this.attachments.push(data.url);

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Media, MediaSaveOptions } from '@capacitor-community/media';
 import { Capacitor } from '@capacitor/core';
 import { Directory, Filesystem } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
@@ -8,6 +9,7 @@ import { FileService } from 'src/app/services/file.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-gallery',
@@ -46,24 +48,25 @@ export class GalleryComponent implements OnInit {
   }
 
   downloadImage() {
-    const urlParts = this.currentImage!.split('/');
-    const key = urlParts[urlParts.length - 1];
-
-    this.spinnerService.showSpinner();
-    this.fileService.getFile(key)
-      .then(async (res: S3FileContent) => {
-        const { name, contentType, content } = res;
-        const base64Data = content.split(',')[1];
-
-        if (environment.mode === 'web') {
-          this.saveImgInWeb(name, base64Data, contentType);
-        } else {
-          await this.saveImgInApp(name, base64Data, contentType);
-        }
-      })
-      .catch(e => {
-        this.alertService.showAlert("Error", "Se ha producido un error descargando el adjunto. Inténtelo de nuevo más tarde.")
-      }).finally(() => this.spinnerService.closeSpinner());
+    if(environment.mode === 'app') {
+      this.spinnerService.showSpinner();
+      this.saveImgInApp(this.currentImage!)
+        .finally(() => this.spinnerService.closeSpinner());
+    } else {
+      const urlParts = this.currentImage!.split('/');
+      const key = urlParts[urlParts.length - 1];
+  
+      this.spinnerService.showSpinner();
+      this.fileService.getFile(key)
+        .then(async (res: S3FileContent) => {
+          const { name, contentType, content } = res;
+          const base64Data = content.split(',')[1];
+            this.saveImgInWeb(name, base64Data, contentType);
+        })
+        .catch(e => {
+          this.alertService.showAlert("Error", "Se ha producido un error descargando el adjunto. Inténtelo de nuevo más tarde.")
+        }).finally(() => this.spinnerService.closeSpinner());
+    }
 
   }
 
@@ -90,23 +93,6 @@ export class GalleryComponent implements OnInit {
     }
   }
 
-  private getFormattedCurrentDate() {
-    // Crear un nuevo objeto Date con la fecha y hora actual
-    const now = new Date();
-
-    // Obtener cada componente de la fecha
-    const year = now.getFullYear(); // YYYY
-    const month = (now.getMonth() + 1).toString().padStart(2, '0'); // MM (getMonth() es 0-indexado)
-    const day = now.getDate().toString().padStart(2, '0'); // DD
-    const hours = now.getHours().toString().padStart(2, '0'); // HH
-    const minutes = now.getMinutes().toString().padStart(2, '0'); // MM
-    const seconds = now.getSeconds().toString().padStart(2, '0'); // SS
-
-    // Concatenar todos los componentes
-    const formattedDateTime = `${year}${month}${day}${hours}${minutes}${seconds}`;
-    return formattedDateTime;
-  }
-
   private saveImgInWeb(name: string, base64Data: string, contentType: string) {
     // Convertir base64 → Blob
     const byteCharacters = atob(base64Data);
@@ -121,7 +107,7 @@ export class GalleryComponent implements OnInit {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = this.getFileName(name);  // nombre que vino de la API
+    a.download = name;
     document.body.appendChild(a);
     a.click();
 
@@ -130,50 +116,40 @@ export class GalleryComponent implements OnInit {
     window.URL.revokeObjectURL(url);
   }
 
-  private async saveImgInApp(name: string, base64Data: string, contentType: string) {
+
+  async saveImgInApp(path: string) {
     try {
-      let result;
-
-      if (Capacitor.getPlatform() === 'android') {
-        // Guardar en Downloads
-        result = await Filesystem.writeFile({
-          path: `Pictures/ComuniKame/${this.getFileName(name)}`,
-          data: base64Data,
-          directory: Directory.ExternalStorage,
-          recursive: true
-        });
-
-        console.log('Archivo guardado en:', result.uri);
-        this.toastService.showToast("Se ha guardado exitosamente")
-
-      } else {
-        // En iOS lo guardamos en sandbox
-        result = await Filesystem.writeFile({
-          path: this.getFileName(name),
-          data: base64Data,
-          directory: Directory.External,
-        });
-        console.log('Archivo guardado en sandbox iOS:', result.uri);
-
-        // En ambos casos abrimos un "share dialog" para que el usuario pueda verlo/exportarlo
-        await Share.share({
-          title: 'Archivo descargado',
-          text: 'Aquí tienes tu archivo',
-          url: result.uri,
-          dialogTitle: 'Compartir archivo'
-
-        });
-      }
+      let opts: MediaSaveOptions = { path, albumIdentifier: await this.getAlbum() };
+      await Media.savePhoto(opts);
+      this.toastService.showToast("Imagen guardada en la galería");
 
     } catch (err) {
-      console.error('Error guardando fichero', err);
-      this.alertService.showAlert("Error", "Se ha producido un error guardando el fichero. Inténtelo de nuevo más tarde.");
+      console.error(err);
+      this.alertService.showAlert("Error", "No se pudo guardar la imagen.");
     }
   }
 
-  private getFileName(name: string) {
-    const extension = name.split(".")[1];
-    return `ComuniKame-${this.getFormattedCurrentDate()}.${extension}`;
+  async getAlbum(): Promise<string | undefined> {
+    if (Capacitor.getPlatform() === 'ios') {
+      return undefined;
+    }
+
+    const albumName = 'ComuniKame';
+
+    //Obtenemos los albumes
+    const { albums } = await Media.getAlbums();
+
+    //Buscamos si existe ComuniKame
+    const albumFound = albums.find(x => x.name === albumName);
+
+    if(albumFound) {
+      //Si lo encontramos, devolvemos el identificador
+      return albumFound.identifier;
+    } else {
+      //Si no lo encontramos, lo creamos y volvemos a llamar a este metodo para encontrar el album
+      await Media.createAlbum({ name: albumName });
+      return this.getAlbum();
+    }
   }
 
 }

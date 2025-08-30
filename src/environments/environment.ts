@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://19dlqvyf7c.execute-api.eu-west-1.amazonaws.com/dev/',
+  baseFrontendUrl: 'http://localhost:8100',
+  baseBackendUrl: 'https://19dlqvyf7c.execute-api.eu-west-1.amazonaws.com/dev/',
   mode: 'web'
   //mode: 'app'
 };

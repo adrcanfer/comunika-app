@@ -9,7 +9,7 @@ import { FirebaseService } from './firebase.service';
 })
 export class ApiService {
 
-  private baseUrl = environment.baseUrl;
+  private baseUrl = environment.baseBackendUrl;
 
   constructor(
     private httpClient: HttpClient,

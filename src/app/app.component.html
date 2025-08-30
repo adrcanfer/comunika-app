@@ -7,27 +7,32 @@
     <ion-menu contentId="main-content" type="overlay" *ngIf="showMenu">
       <ion-content>
         <ion-list id="inbox-list">
-          <div class="brand ion-padding">
+          <div class="brand">
             <img class="ion-padding" src="assets/icon/brandname.png"/>
           </div>
+          <div class="brand-url text-center ion-padding-bottom">
+            <a (click)="openLink('https://www.comunikame.es')">www.comunikame.es</a>
+          </div>
 
-          @for (p of appPages; track p; let i = $index) {
+          <div class="ion-padding-top">
+            @for (p of appPages; track p; let i = $index) {
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                  <ion-label>{{ p.title }}</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            }
             <ion-menu-toggle auto-hide="false">
-              <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-                <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-                <ion-label>{{ p.title }}</ion-label>
+              <ion-item lines="none" detail="false" [button]="true" (click)="logout()">
+                <ion-icon aria-hidden="true" slot="start" [ios]="'exit-outline'" [md]="'exit-sharp'"></ion-icon>
+                <ion-label>Cerrar Sesión</ion-label>
               </ion-item>
             </ion-menu-toggle>
-          }
-          <ion-menu-toggle auto-hide="false">
-            <ion-item lines="none" detail="false" [button]="true" (click)="logout()">
-              <ion-icon aria-hidden="true" slot="start" [ios]="'exit-outline'" [md]="'exit-sharp'"></ion-icon>
-              <ion-label>Cerrar Sesión</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+          </div>
         </ion-list>
         <div class="brand-url text-center ion-padding-top">
-          <a href="https://www.comunikame.es" target="_blank">www.comunikame.es</a>
+          <a (click)="openLink('web/privacy-policy')">Política de privacidad</a>
         </div>
       </ion-content>
     </ion-menu>

@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { FirebaseService } from './services/firebase.service';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-root',
@@ -64,6 +65,11 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('web/login');
   }
 
+  openLink(link: string) {
+    const url = link.startsWith('/') ? `${environment.baseFrontendUrl}${link}` : link;
+    Browser.open({ url });
+  }
+
   private showMenuIcon(url: string): void {
     if (environment.mode === 'app') {
       this.showMenu = url.includes('sources');
@@ -77,15 +83,16 @@ export class AppComponent implements OnInit {
     if (environment.mode === 'app') {
       this.appPages = [
         { title: 'Notificaciones', url: '/mobile/sources/events', icon: 'mail' },
-        { title: 'Calendario', url: '/mobile/sources/calendar', icon: 'calendar' },
+        //{ title: 'Calendario', url: '/mobile/sources/calendar', icon: 'calendar' },
         { title: 'Fuentes de Datos', url: '/mobile/select-sources', icon: 'radio' },
-        { title: 'Sobre Nosotros', url: '/mobile/select-sources', icon: 'information-circle' }
+        //{ title: 'Sobre Nosotros', url: '/mobile/select-sources', icon: 'information-circle' }
       ];
     } else {
       this.appPages = [
         { title: 'Notificaciones', url: '/web/my-events', icon: 'mail' },
-        { title: 'Calendario', url: '/web/my-calendar', icon: 'calendar' }
+        //{ title: 'Calendario', url: '/web/my-calendar', icon: 'calendar' }
       ];
     }
   }
+
 }

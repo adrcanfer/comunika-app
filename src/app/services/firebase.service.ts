@@ -19,12 +19,12 @@ export class FirebaseService {
 
   private loadFirebaseConfig() {
     const firebaseConfig = {
-      apiKey: "AIzaSyCihBoy8B_NEUwa2_QQbQB_a_E6xpIbCMg",
-      authDomain: "comunika-app.firebaseapp.com",
-      projectId: "comunika-app",
-      storageBucket: "comunika-app.firebasestorage.app",
-      messagingSenderId: "701591563049",
-      appId: "1:701591563049:web:d97a181914198352282538"
+      apiKey: "AIzaSyC8aETGRNmVCaESVfe_Q1Ifj1F1lBY2d0Y",
+      authDomain: "comunikame-app.firebaseapp.com",
+      projectId: "comunikame-app",
+      storageBucket: "comunikame-app.firebasestorage.app",
+      messagingSenderId: "533384881431",
+      appId: "1:533384881431:web:e8d14f8650c48d00b10352"
     };
 
     // Initialize Firebase

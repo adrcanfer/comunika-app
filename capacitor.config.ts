@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.adrcanfer.comunika',
-  appName: 'ComuniKa',
+  appId: 'com.adrcanfer.comunikame',
+  appName: 'ComuniKame',
   webDir: 'www',
   plugins: {
     PushNotifications: {

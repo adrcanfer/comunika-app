@@ -1,4 +1,4 @@
-package com.adrcanfer.comunika;
+package com.adrcanfer.comunikame;
 
 import com.getcapacitor.BridgeActivity;
 

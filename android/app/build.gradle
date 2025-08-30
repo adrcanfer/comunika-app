@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "com.adrcanfer.comunika"
+    namespace "com.adrcanfer.comunikame"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.adrcanfer.comunika"
+        applicationId "com.adrcanfer.comunikame"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 1000001
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

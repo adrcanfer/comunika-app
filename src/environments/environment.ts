@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false,
-  baseFrontendUrl: 'http://localhost:8100',
+  //baseFrontendUrl: 'http://localhost:8100',
+  baseFrontendUrl: 'https://www.comunikame.es',
   baseBackendUrl: 'https://19dlqvyf7c.execute-api.eu-west-1.amazonaws.com/dev/',
-  mode: 'web'
-  //mode: 'app'
+  //mode: 'web'
+  mode: 'app'
 };
 
 /*

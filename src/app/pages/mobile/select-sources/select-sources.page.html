@@ -12,7 +12,7 @@
 <ion-content>
   <div class="content ion-padding">
     <div class="search-input ion-padding">
-        <ion-input fill="outline" placeholder="Buscar fuentes" type="text" mode="md" (ionInput)="searchInput($event)" (keyup.enter)="search()">
+        <ion-input fill="outline" placeholder="Buscar fuentes" type="text" mode="md" [value]="searchKey" (ionInput)="searchInput($event)" (keyup.enter)="search()">
           <ion-button fill="clear" slot="end" (click)="search()">
             <ion-icon slot="icon-only" name="search"></ion-icon>
           </ion-button>

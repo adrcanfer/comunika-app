@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { suscribedSourcesGuard } from "src/app/guards/suscribed-sources.guard";
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'sources/:action',
+    canActivate: [suscribedSourcesGuard],
     loadChildren: () => import('./sources/sources.module').then( m => m.SourcesPageModule)
   },
   {

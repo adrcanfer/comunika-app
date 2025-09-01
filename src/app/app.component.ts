@@ -7,6 +7,8 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { FirebaseService } from './services/firebase.service';
 import { Browser } from '@capacitor/browser';
+import { Preferences } from '@capacitor/preferences';
+import { PreferenceConstants } from './utils/preferences.util';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +21,7 @@ export class AppComponent implements OnInit {
 
   public showMenu: boolean = true;
   public loading: boolean = false;
+  mode: string = environment.mode;
   closed$ = new Subject<any>();
 
 
@@ -70,8 +73,16 @@ export class AppComponent implements OnInit {
     Browser.open({ url });
   }
 
-  private showMenuIcon(url: string): void {
+  private async showMenuIcon(url: string) {
     if (environment.mode === 'app') {
+      const hasSubscribedSources = (await Preferences.get({ key: PreferenceConstants.subscribedSources }))?.value != undefined;
+      if(!hasSubscribedSources) {
+        this.showMenu = false;
+        return;
+      }
+    }
+
+    if (environment.mode === 'app') {  
       this.showMenu = url.includes('sources');
     } else {
       this.showMenu = url.includes('web/my-events')

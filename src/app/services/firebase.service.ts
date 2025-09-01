@@ -65,7 +65,6 @@ export class FirebaseService {
     await this.auth!.authStateReady();
 
     if(this.auth!.currentUser) {
-      console.error(this.auth!.currentUser);
       return this.auth!.currentUser!.getIdToken();
     } else {
       return new Promise((resolve) => resolve(undefined));

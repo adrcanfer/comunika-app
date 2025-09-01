@@ -23,7 +23,7 @@
                 </ion-item>
               </ion-menu-toggle>
             }
-            <ion-menu-toggle auto-hide="false">
+            <ion-menu-toggle *ngIf="mode === 'web'" auto-hide="false">
               <ion-item lines="none" detail="false" [button]="true" (click)="logout()">
                 <ion-icon aria-hidden="true" slot="start" [ios]="'exit-outline'" [md]="'exit-sharp'"></ion-icon>
                 <ion-label>Cerrar Sesión</ion-label>
@@ -32,7 +32,7 @@
           </div>
         </ion-list>
         <div class="brand-url text-center ion-padding-top">
-          <a (click)="openLink('web/privacy-policy')">Política de privacidad</a>
+          <a (click)="openLink('/web/privacy-policy')">Política de privacidad</a>
         </div>
       </ion-content>
     </ion-menu>

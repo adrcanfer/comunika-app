@@ -1,0 +1,216 @@
+:host {
+    display: block;
+}
+
+.section {
+    padding: 64px;
+}
+
+.section.even {
+    background-color: #F3F4F6;
+}
+
+.section.odd {
+    background-color: #FFFFFF;
+}
+
+.brand {
+    max-width: 300px;
+    margin: auto;
+}
+
+.container {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.header h1 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1F2937;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+}
+
+.header p {
+    font-size: 20px;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.card {
+    background-color: #FFFFFF;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px 4px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition-property: transform;
+    transition-duration: 300ms;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 9999px;
+    margin-bottom: 1rem;
+}
+
+.icon-container ion-icon {
+    font-size: 2rem;
+}
+
+.card h3 {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #1F2937;
+    margin-bottom: 0.5rem;
+}
+
+.card p {
+    color: #4B5563;
+}
+
+/* Colores de los iconos y contenedores */
+.card-blue .icon-container {
+    background-color: #DBEAFE;
+    color: #3B82F6;
+}
+
+.card-green .icon-container {
+    background-color: #D1FAE5;
+    color: #10B981;
+}
+
+.card-yellow .icon-container {
+    background-color: #FEF3C7;
+    color: #F59E0B;
+}
+
+.card-red .icon-container {
+    background-color: #FEE2E2;
+    color: #EF4444;
+}
+
+.card-purple .icon-container {
+    background-color: #EDE9FE;
+    color: #8B5CF6;
+}
+
+
+/* Estilos de las tarjetas de precios */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.pricing-card {
+    background-color: #FFFFFF;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px 4px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.pricing-card h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.pricing-features li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.pricing-features ion-icon {
+    margin-right: 0.5rem;
+    color: #10B981;
+}
+
+.pricing-price {
+    display: flex;
+    align-items: flex-end;
+    margin-top: auto;
+    margin-bottom: 1.5rem;
+}
+
+.price-value {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.price-period {
+    font-size: 1rem;
+    color: #4B5563;
+    margin-left: 0.5rem;
+    line-height: 1.5;
+}
+
+ion-header {
+    visibility: hidden;
+    
+}
+
+ion-header.visible {
+    visibility: inherit;
+}
+
+.footer {
+    height: 106px;
+    background-color: var(--ion-color-dark);
+    color: white;
+}

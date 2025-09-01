@@ -1,0 +1,31 @@
+.initial-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--ion-color-primary);
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.source-icon {
+    max-height: 40px;
+}
+
+.event-footer {
+    padding: 8px 16px;
+    background-color: var(--ion-color-light);
+}
+
+.source-name {
+    color: black;
+    font-weight: bold;
+}
+
+.read-icon {
+    font-size: 22px;
+    padding-right: 8px;
+}

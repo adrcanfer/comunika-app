@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="header-img">
+      <img src="assets/icon/brandname.png" />
+    </div>
+    <div slot="end" class="ion-padding-end">
+      <ion-button shape="round" fill="outline" routerLink="/web/home">Inicio</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="container row ion-padding">
+    <div class="col brand-container">
+      <div class="ion-padding">
+        <img src="assets/icon/icon.png">
+        <img src="assets/icon/brandname.png">
+      </div>
+
+      <div class="slogan ion-padding text-center">Haz que tus mensajes lleguen</div>
+    </div>
+    <div class="col main-container ion-padding">
+      <div class="title">Iniciar sesión</div>
+
+      <form class="form" [formGroup]="form">
+        <div class="form-item ion-padding">
+          <ion-input label="Correo" label-placement="floating" fill="outline" formControlName="email" type="email"
+            errorText="Correo inválido" mode="md"></ion-input>
+        </div>
+        <div class="form-item ion-padding">
+          <ion-input label="Contraseña" label-placement="floating" fill="outline" formControlName="password"
+          errorText="Contraseña inválida" type="password" mode="md">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+        </div>
+      </form>
+
+      <div class="error ion-padding" *ngIf="loginError">{{loginError}}</div>
+
+
+      <div class="button text-center ion-padding-bottom">
+        <ion-button shape="round" (click)="login()">Continuar</ion-button>
+      </div>
+      <div class="button text-center ion-padding-bottom">
+        <ion-button shape="round" fill="outline" routerLink="/web/signup">Registrarse</ion-button>
+      </div>
+      <div class="retrieve-password text-center ion-padding-bottom">
+        <a routerLink="/web/retrieve-password">¿Has olvidado tu contraseña?</a>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,13 @@
+<ion-card (click)="showDetail()">
+  <div class="row ion-padding">
+    <div class="col ion-padding-end icon-col">
+      <img class="source-icon" *ngIf="source.icon !== undefined && source.icon !== ''" [src]="source.icon" alt="" />
+      <div *ngIf="source.icon === undefined || source.icon === ''" class="initial-circle">
+        {{ source.name.charAt(0) | uppercase }}
+      </div>
+    </div>
+    <div class="main-col">
+      <div class="source-name">{{source.name}}</div>
+    </div>
+  </div>
+</ion-card>

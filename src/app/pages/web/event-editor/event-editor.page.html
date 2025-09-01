@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div class="header-img">
+      <img src="assets/icon/brandname.png" />
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container fit-container ion-padding">
+    <div class="title text-center ion-padding">
+      <ng-container *ngIf="!eventId">Crear notificación</ng-container>
+      <ng-container *ngIf="eventId">Editar notificación</ng-container>
+    </div>
+
+    <div class="ion-padding">
+      <div class="create-btn text-end ion-padding-bottom">
+        <ion-button class="margin-right" fill="outline" shape="round" (click)="back()">Volver</ion-button>
+        <ion-button color="secondary" shape="round" (click)="save()">
+          <ng-container *ngIf="!eventId">Crear</ng-container>
+          <ng-container *ngIf="eventId">Guardar</ng-container>
+        </ion-button>
+      </div>
+
+      <div class="editor">
+        <form class="form" [formGroup]="form">
+          <div class="form-item ion-padding">
+            <div class="form-item-title">Título</div>
+            <ion-input fill="outline" formControlName="title" type="text"
+              errorText="Título inválido" mode="md"></ion-input>
+          </div>
+
+          <div class="form-item ion-padding">
+            <ion-toggle [checked]="showStats" (ionChange)="showStats = $event.detail.checked"
+              helperText="Se mostrará públicamente el número de veces que se ha leido la notificación" justify="space-between">
+              Mostrar visualizaciones
+            </ion-toggle>
+          </div>
+          <div class="text-editor ion-padding">
+            <div class="form-item-title">Contenido</div>
+            <editor licenseKey="gpl"
+              [init]="editorConfig"
+              formControlName="content"
+            ></editor>
+            <div *ngIf="!form.controls['content'].valid && form.controls['content'].touched" class="error ion-padding">Contenido inválido</div>
+          </div>
+          <div class="attachments ion-padding">
+            <div class="row attachments-header">
+              <div class="form-item-title main-col">Adjuntos</div>
+              <div>
+                <ion-button shape="round" class="ion-padding-end" color="secondary" (click)="attachemntInput.click()">
+                  <ion-icon slot="icon-only" name="attach-outline"></ion-icon>
+                </ion-button>
+              </div>
+              <input hidden #attachemntInput type="file"  accept="image/*" (change)="addAttachment($event)" multiple/>
+            </div>
+            <div class="attachments-content ion-padding">
+              <div *ngIf="attachments.length > 0">
+                <app-gallery [attachments]="attachments" (action)="handleAction($event.action, $event.url)" [editMode]="true"></app-gallery>
+              </div>
+              <div *ngIf="attachments.length === 0" class="text-center">No hay ningún adjunto</div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>

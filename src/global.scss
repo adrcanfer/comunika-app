@@ -34,4 +34,96 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+//@import "@ionic/angular/css/palettes/dark.system.css";
+
+//==============BASIC===============
+.text-center {
+    text-align: center;
+}
+
+.text-end {
+    text-align: end;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+.margin-left {
+    margin-left: 16px;
+}
+.margin-right {
+    margin-right: 16px;
+}
+
+.fit-container {
+    max-width: 700px;
+    margin: auto;
+}
+//===============AUX================
+ion-card {
+    border-radius: 20px;
+}
+
+.title {
+    font-size: 36px;
+    padding-bottom: 32px;
+}
+
+.header-img {
+    padding-left: 16px;
+    width: 150px;
+}
+
+.error {
+    color: var(--ion-color-danger)
+}
+
+.slogan {
+    font-style: italic;
+    font-size: 20px;
+}
+
+.input-helper {
+    text-align: justify;
+    font-style: italic;
+    font-size: 14px;
+    padding-left: 8px;
+    padding-top: 8px;
+}
+
+.floatting-button {
+    position: fixed;
+    bottom: 70px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: center;
+
+    & button {
+        max-width: 500px;
+    }
+}
+
+@media (min-width: 992px) {
+    .header-container{
+        display: none;
+    }
+}
+

@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{getTitle()}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="container ion-padding">
+    <div class="sources">
+      <app-source-entry *ngFor="let s of sources" [source]="s" [action]="action"></app-source-entry>
+    </div>
+  </div>
+</ion-content>

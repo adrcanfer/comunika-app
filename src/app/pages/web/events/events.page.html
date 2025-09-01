@@ -1,0 +1,33 @@
+<ion-header class="header-container" [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div class="header-img">
+      <img src="assets/icon/brandname.png" />
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container fit-container ion-padding">
+    <div class="title text-center ion-padding">Notificaciones</div>
+
+    <div class="events ion-padding">
+      <div *ngIf="loggedUser" class="create-btn text-end ion-padding-bottom">
+        <ion-button color="secondary" shape="round" routerLink="/web/event-editor">Nuevo</ion-button>
+      </div>
+
+      <div class="text-center ion-padding" *ngIf="loggedUser && events && events.length === 0">Aún no has creado ningún evento</div>
+      <div class="text-center ion-padding" *ngIf="!loggedUser && events && events.length === 0">No hay eventos disponibles</div>
+
+      <div class="event-list">
+        <app-event-entry *ngFor="let e of events" [event]="e"></app-event-entry>
+      </div>
+
+      <ion-infinite-scroll (ionInfinite)="loadNextContent($event)" threshold="100px" [disabled]="endInfiniteScroll">
+        <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
+</ion-content>

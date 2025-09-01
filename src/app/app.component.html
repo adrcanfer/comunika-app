@@ -1,31 +1,39 @@
 <ion-app>
+  <div class="spinner" *ngIf="loading">
+    <ion-spinner color="secondary"></ion-spinner>
+  </div>
+
   <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
+    <ion-menu contentId="main-content" type="overlay" *ngIf="showMenu">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi&#64;ionicframework.com</ion-note>
+          <div class="brand">
+            <img class="ion-padding" src="assets/icon/brandname.png"/>
+          </div>
+          <div class="brand-url text-center ion-padding-bottom">
+            <a (click)="openLink('https://www.comunikame.es')">www.comunikame.es</a>
+          </div>
 
-          @for (p of appPages; track p; let i = $index) {
-            <ion-menu-toggle auto-hide="false">
-              <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-                <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-                <ion-label>{{ p.title }}</ion-label>
+          <div class="ion-padding-top">
+            @for (p of appPages; track p; let i = $index) {
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                  <ion-label>{{ p.title }}</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            }
+            <ion-menu-toggle *ngIf="mode === 'web'" auto-hide="false">
+              <ion-item lines="none" detail="false" [button]="true" (click)="logout()">
+                <ion-icon aria-hidden="true" slot="start" [ios]="'exit-outline'" [md]="'exit-sharp'"></ion-icon>
+                <ion-label>Cerrar Sesión</ion-label>
               </ion-item>
             </ion-menu-toggle>
-          }
+          </div>
         </ion-list>
-
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          @for (label of labels; track label) {
-            <ion-item lines="none">
-              <ion-icon aria-hidden="true" slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-              <ion-label>{{ label }}</ion-label>
-            </ion-item>
-          }
-        </ion-list>
+        <div class="brand-url text-center ion-padding-top">
+          <a (click)="openLink('/web/privacy-policy')">Política de privacidad</a>
+        </div>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

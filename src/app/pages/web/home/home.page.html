@@ -1,0 +1,157 @@
+<ion-header [ngClass]="{'visible': showHeader}" [translucent]="true">
+    <ion-toolbar>
+        <div class="header-img">
+            <img src="assets/icon/brandname.png" />
+        </div>
+        <div slot="end" class="ion-padding-end">                
+            <ion-button shape="round" routerLink="/web/login">Continuar</ion-button>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content scrollEvents="true" (ionScroll)="onScroll($event)">
+    <div class="container">
+        <div #firstContainer class="section odd">
+            <div class="brand ion-padding">
+                <img src="assets/icon/icon.png">
+                <img src="assets/icon/brandname.png">
+            </div>
+    
+            <div class="slogan ion-padding text-center">Haz que tus mensajes lleguen</div>
+    
+            <div class="text-center ion-padding">
+                <ion-button shape="round" routerLink="/web/login">Continuar</ion-button>
+            </div>
+        </div>
+        <!-- Contenido principal de la landing page con las tarjetas -->
+        <div class="section even">
+            <div class="header">
+                <h1>
+                    La plataforma definitiva para el envío de comunicados
+                </h1>
+                <p>
+                    Garantizando que tus mensajes más importantes lleguen a las personas adecuadas, de forma simple y directa.
+                    Es la herramienta perfecta para organizaciones que necesitan una comunicación unidireccional, sin ruido y sin distracciones.
+                </p>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Tarjeta para Ayuntamientos -->
+                <div class="card card-blue">
+                    <div class="icon-container">
+                        <ion-icon name="business-outline"></ion-icon>
+                    </div>
+                    <h3>Administraciones públicas</h3>
+                    <p>
+                        Transmite avisos, información de servicios y noticias de última hora sin que se pierdan en el flujo de las redes sociales.
+                    </p>
+                </div>
+
+                <!-- Tarjeta para Colegios -->
+                <div class="card card-green">
+                    <div class="icon-container">
+                        <ion-icon name="school-outline"></ion-icon>
+                    </div>
+                    <h3>Centros educativos</h3>
+                    <p>
+                        Envía comunicados a padres y estudiantes, notifica eventos o anuncia cierres de forma inmediata y fiable.
+                    </p>
+                </div>
+
+                <!-- Tarjeta para Comunidades de Vecinos -->
+                <div class="card card-yellow">
+                    <div class="icon-container">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </div>
+                    <h3>Comunidades de vecinos</h3>
+                    <p>
+                        Mantén a los propietarios informados sobre reuniones, derramas o problemas de mantenimiento con un canal directo y ordenado.
+                    </p>
+                </div>
+                
+                <!-- Tarjeta para Clubes deportivos -->
+                <div class="card card-red">
+                    <div class="icon-container">
+                        <ion-icon name="american-football-outline"></ion-icon>
+                    </div>
+                    <h3>Clubes deportivos</h3>
+                    <p>
+                        Envía notificaciones sobre horarios de entrenamientos, cambios de partidos, cancelaciones o eventos especiales de forma clara.
+                    </p>
+                </div>
+                
+                <!-- Tarjeta para Empresas -->
+                <div class="card card-purple">
+                    <div class="icon-container">
+                        <ion-icon name="briefcase-outline"></ion-icon>
+                    </div>
+                    <h3>Empresas</h3>
+                    <p>
+                        Comunica de manera efectiva información interna, novedades o anuncios importantes a tus empleados, asegurando que todos estén al tanto.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de tarifas -->
+        <div class="section odd">
+            <div class="header">
+                <h1>
+                    Planes de precios
+                </h1>
+                <p>
+                    Elige el plan que mejor se adapte a tus necesidades.
+                </p>
+            </div>
+            
+            <div class="pricing-grid">
+                <!-- Tarjeta de plan gratuito -->
+                <div class="pricing-card">
+                    <h2>Free</h2>
+                    <ul class="pricing-features">
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Con anuncios</li>
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Hasta 1.000 suscriptores</li>
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> 10 notificaciones al mes</li>
+                    </ul>
+                    <div class="pricing-price">
+                        <span class="price-value">0€</span>
+                        <span class="price-period">al mes</span>
+                    </div>
+                    <ion-button expand="block" shape="round" (click)="signup('free')">Comenzar</ion-button>
+                </div>
+                
+                <!-- Tarjeta de plan Plus -->
+                <div class="pricing-card">
+                    <h2>Plus</h2>
+                    <ul class="pricing-features">
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Sin anuncios</li>
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Hasta 3.000 suscriptores</li>
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Notificaciones ilimitadas</li>
+                    </ul>
+                    <div class="pricing-price">
+                        <span class="price-value">9,90€</span>
+                        <span class="price-period">al mes</span>
+                    </div>
+                    <ion-button expand="block" color="secondary" shape="round" (click)="signup('plus')">Elegir plan</ion-button>
+                </div>
+                
+                <!-- Tarjeta de plan Pro -->
+                <div class="pricing-card">
+                    <h2>Pro</h2>
+                    <ul class="pricing-features">
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Sin anuncios</li>
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Suscriptores ilimitados</li>
+                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Notificaciones ilimitadas</li>
+                    </ul>
+                    <div class="pricing-price">
+                        <span class="price-value">29,90€</span>
+                        <span class="price-period">al mes</span>
+                    </div>
+                    <ion-button expand="block" color="secondary" shape="round" (click)="signup('pro')">Elegir plan</ion-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer text-center ion-padding">&copy; 2025 ComuniKa. Todos los derechos reservados.</div>
+</ion-content>

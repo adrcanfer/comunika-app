@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "533384881431",
+    "project_id": "comunikame-app",
+    "storage_bucket": "comunikame-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533384881431:android:605c3f008e43e8dbb10352",
+        "android_client_info": {
+          "package_name": "com.adrcanfer.comunikame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ3lN_hk0sWHraTbXFsD5g8gfLlsDlkns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

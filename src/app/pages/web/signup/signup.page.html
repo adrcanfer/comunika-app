@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="header-img">
+      <img src="assets/icon/brandname.png" />
+    </div>
+    <div slot="end" class="ion-padding-end">
+      <ion-button shape="round" fill="outline" routerLink="/web/home">Inicio</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="container row ion-padding">
+    <div class="col brand-container">
+      <div class="ion-padding">
+        <img src="assets/icon/icon.png">
+        <img src="assets/icon/brandname.png">
+      </div>
+
+      <div class="slogan ion-padding text-center">Haz que tus mensajes lleguen</div>
+    </div>
+    <div class="col main-container ion-padding">
+      <div class="title">Registrarse</div>
+
+      <form class="form" [formGroup]="form">
+        <div class="form-item ion-padding">
+          <ion-input label="Nombre" label-placement="floating" fill="outline" formControlName="name" type="text"
+            helperText="Nombre mostrado al recibir un evento. (Ayuntamiento de Sevilla, etc.)"
+            errorText="Nombre inválido" mode="md"></ion-input>
+        </div>
+        <div class="form-item ion-padding">
+          <ion-input label="Correo" label-placement="floating" fill="outline" formControlName="email" type="email"
+            errorText="Correo inválido" mode="md"></ion-input>
+        </div>
+        <div class="form-item ion-padding">
+          <ion-toggle [checked]="public" (ionChange)="public = $event.detail.checked"
+            helperText="Las cuentas públicas podrán ser encontradas desde el buscador." justify="space-between">
+            Cuenta pública
+          </ion-toggle>
+        </div>
+        <div class="form-item ion-padding">
+          <ion-input label="Contraseña" label-placement="floating" fill="outline" formControlName="password"
+            type="password" errorText="Contraseña inválida" mode="md">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+        </div>
+        <div class="form-item ion-padding">
+          <ion-input label="Confirmar contraseña" label-placement="floating" fill="outline"
+            formControlName="confirmPassword" type="password" errorText="Contraseña inválida" mode="md">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+        </div>
+      </form>
+
+      <div class="error ion-padding" *ngIf="loginError">{{loginError}}</div>
+
+      <div class="button text-center ion-padding-bottom">
+        <ion-button shape="round" (click)="signup()">Continuar</ion-button>
+      </div>
+      <div class="button text-center ion-padding-bottom">
+        <ion-button shape="round" fill="outline" routerLink="/web/login">Iniciar sesión</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

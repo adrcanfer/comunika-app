@@ -1,0 +1,33 @@
+import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
+import { Sources } from '../model/sources.model';
+import { Source } from '../model/source.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SourceService {
+
+  constructor(
+    private apiService: ApiService
+  ) { }
+
+  // Método encargado de buscar los sources
+  getSources(query: string): Promise<Sources> {
+    let url = `source?name=${query}`;
+    return this.apiService.doGet(url);
+  }
+
+  // Método encargado de recuperar los sources
+  getSourcesBatch(sourceIds: string): Promise<Sources> {
+    let url = `source/batch/search`;
+    const body = {sourceIds}
+    return this.apiService.doPost(url, body);
+  }
+
+  // Método encargado de crear un source
+  postSource(source: Source): Promise<void> {
+    let url = `source`;
+    return this.apiService.doPost(url, source);
+  }
+}

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Sources } from '../model/sources.model';
 import { Source } from '../model/source.model';
+import { Account } from '../model/account.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,11 @@ export class SourceService {
   postSource(source: Source): Promise<void> {
     let url = `source`;
     return this.apiService.doPost(url, source);
+  }
+
+  // Método encargado de recuperar la cuenta
+  getAccount(): Promise<Account> {
+    let url = `account`;
+    return this.apiService.doGet(url);
   }
 }

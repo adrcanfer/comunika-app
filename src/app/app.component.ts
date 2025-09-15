@@ -86,7 +86,8 @@ export class AppComponent implements OnInit {
       this.showMenu = url.includes('sources');
     } else {
       this.showMenu = url.includes('web/my-events')
-        || url.includes('web/my-calendar');
+        || url.includes('web/my-calendar')
+        || url.includes('web/account');
     }
   }
 
@@ -101,7 +102,8 @@ export class AppComponent implements OnInit {
     } else {
       this.appPages = [
         { title: 'Notificaciones', url: '/web/my-events', icon: 'mail' },
-        //{ title: 'Calendario', url: '/web/my-calendar', icon: 'calendar' }
+        //{ title: 'Calendario', url: '/web/my-calendar', icon: 'calendar' },
+        { title: 'Mi Cuenta', url: '/web/account', icon: 'person' }
       ];
     }
   }

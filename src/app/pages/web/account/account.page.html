@@ -1,0 +1,78 @@
+<ion-header class="header-container" [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div class="header-img">
+      <img src="assets/icon/brandname.png" />
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container fit-container ion-padding">
+    <div class="title text-center ion-padding">Mi cuenta</div>
+
+    <div class="content ion-padding" *ngIf="account">
+
+      <div class="source">
+        <ion-card>
+          <div class="row ion-padding">
+            <div class="col ion-padding-end">
+              <img class="source-icon" *ngIf="account.source!.icon !== undefined && account.source!.icon !== ''"
+                [src]="account.source!.icon" alt="" />
+              <div *ngIf="account.source!.icon === undefined || account.source!.icon === ''" class="initial-circle">
+                {{ account.source!.name.charAt(0) | uppercase }}
+              </div>
+            </div>
+            <div class="main-col text-center ion-padding-end">
+              <div class="card-title ion-padding-bottom">
+                {{account.source!.name}}
+              </div>
+              <div class="plan">
+                Plan: {{account.source.plan}}
+              </div>
+            </div>
+          </div>
+        </ion-card>
+
+        <div class="statistics row">
+          <div class="col statistic">
+            <ion-card>
+              <div class="text-center ion-padding">
+                <div class="card-title ion-padding-bottom">
+                  Suscriptores
+                </div>
+                <div class="row statistics-data ion-padding-bottom">
+                  <div style="padding-right: 4px;">{{account.subscriptors}}</div> de <div style="padding-left: 4px;">{{planDetail!.subscriptions!}}</div>
+                </div>
+                <div class="ion-padding-bottom">
+                  <ion-progress-bar [value]="subscriptorsProgress"></ion-progress-bar>
+                </div>
+                <div class="statistics-disclaimer ion-padding-top">* Número de subscriptores totales.</div>
+  
+              </div>
+            </ion-card>
+          </div>
+
+          <div class="col statistic">
+            <ion-card>
+              <div class="text-center ion-padding">
+                <div class="card-title ion-padding-bottom">
+                  Notificaciones
+                </div>
+                <div class="row statistics-data ion-padding-bottom">
+                  <div style="padding-right: 4px;">{{account.events}}</div> de <div style="padding-left: 4px;">{{planDetail!.notifications!}}</div>
+                </div>
+                <div class="ion-padding-bottom">
+                  <ion-progress-bar [value]="notificationsProgress"></ion-progress-bar>
+                </div>
+                <div class="statistics-disclaimer ion-padding-top">* Número de notificaciones enviadas en el mes actual.</div>
+              </div>
+            </ion-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

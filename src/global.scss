@@ -51,6 +51,10 @@
     align-items: center;
 }
 
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
 .col {
     display: flex;
     flex-direction: column;
@@ -73,6 +77,10 @@
 .fit-container {
     max-width: 700px;
     margin: auto;
+}
+
+.justify-center {
+    justify-content: center;
 }
 //===============AUX================
 ion-card {
@@ -119,6 +127,12 @@ ion-card {
     & button {
         max-width: 500px;
     }
+}
+
+ion-modal {
+    --max-width: 85%;
+    --max-height: 356px;
+    --border-radius: 5px;
 }
 
 @media (min-width: 992px) {

@@ -32,6 +32,12 @@ export class SourceService {
     return this.apiService.doPost(url, source);
   }
 
+  // Método encargado de crear un source
+  putSource(source: Source): Promise<void> {
+    let url = `source`;
+    return this.apiService.doPut(url, source);
+  }
+
   // Método encargado de recuperar la cuenta
   getAccount(): Promise<Account> {
     let url = `account`;

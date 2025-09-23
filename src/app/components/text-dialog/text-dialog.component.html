@@ -1,0 +1,11 @@
+<div class="wrapper content ion-padding">
+  <div class="title ion-padding">{{title}}</div>
+
+  <div class="ion-padding input">
+    <ion-input autofocus label-placement="floating" fill="outline" autocapitalize="sentences" [value] ="content" (ionInput)="changeContent($event)" mode="md"></ion-input>
+  </div>
+
+  <div class="ion-padding buttons">
+    <ion-button class="ion-padding-left" (click)="emit()">Guardar</ion-button>
+  </div>
+</div>

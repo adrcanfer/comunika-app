@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ViewWillEnter } from '@ionic/angular';
 import { Account } from 'src/app/model/account.model';
 import { AlertService } from 'src/app/services/alert.service';
+import { DialogService } from 'src/app/services/dialog.service';
 import { SourceService } from 'src/app/services/source.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { getPlanDetail, PlanDetail } from 'src/app/utils/plans';
@@ -16,17 +17,22 @@ export class AccountPage implements ViewWillEnter {
 
   account?: Account;
   planDetail?: PlanDetail;
-  subscriptorsProgress: number = 1;
-  notificationsProgress: number = 1;
+  subscriptorsProgress: number = 0;
+  notificationsProgress: number = 0;
 
   constructor(
     private sourceService: SourceService,
     private spinnerService: SpinnerService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private dialogService: DialogService
   ) { }
 
   ionViewWillEnter() {
     this.getAccount();
+  }
+
+  getPlan() {
+    return this.planDetail?.name;
   }
 
   getSubscriptorsProgress() {
@@ -38,6 +44,21 @@ export class AccountPage implements ViewWillEnter {
   getNotificationsProgress() {
     if(this.planDetail!.notifications != 'Ilimitado') {
       this.notificationsProgress = this.account!.events / this.planDetail!.notifications;
+    }
+  }
+
+  async editName() {
+    const content = await this.dialogService.openTextDialog("Nombre de la cuenta", this.account!.source.name);
+
+    if (content !== null && content!.length > 3 && this.account!.source.name != content) {
+      this.spinnerService.showSpinner();
+      this.account!.source.name = content!;
+
+      this.sourceService.putSource(this.account?.source!)
+        .catch(e => console.error(e))
+        .finally(() => {
+          this.spinnerService.closeSpinner(); 
+        });      
     }
   }
 

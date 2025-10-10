@@ -55,6 +55,10 @@ const routes: Routes = [
     path: 'account',
     loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
   },
+  {
+    path: 'select-plan/:current-plan',
+    loadChildren: () => import('./select-plan/select-plan.module').then( m => m.SelectPlanPageModule)
+  },
   
 ];
 

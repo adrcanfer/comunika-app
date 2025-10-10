@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ViewWillEnter } from '@ionic/angular';
 import { Account } from 'src/app/model/account.model';
 import { S3FileContent } from 'src/app/model/s3-file-content.model';
@@ -28,7 +29,8 @@ export class AccountPage implements ViewWillEnter {
     private spinnerService: SpinnerService,
     private alertService: AlertService,
     private dialogService: DialogService,
-    private fileService: FileService
+    private fileService: FileService,
+    private router: Router
   ) { }
 
   ionViewWillEnter() {
@@ -90,6 +92,10 @@ export class AccountPage implements ViewWillEnter {
 
   }
 
+  updatePlan() {
+    this.router.navigateByUrl("/web/select-plan/" + this.planDetail!.name);
+  }
+
   private getAccount() {
     this.spinnerService.showSpinner();
     this.sourceService.getAccount()
@@ -117,7 +123,6 @@ export class AccountPage implements ViewWillEnter {
         if(oldIcon) {
           this.deleteFile(oldIcon);
         }
-
 
       }).catch(e => {
         console.error(e);

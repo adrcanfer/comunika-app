@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AccountPageRoutingModule } from './account-routing.module';
+import { SelectPlanPageRoutingModule } from './select-plan-routing.module';
 
-import { AccountPage } from './account.page';
+import { SelectPlanPage } from './select-plan.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    AccountPageRoutingModule,
+    SelectPlanPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [AccountPage]
+  declarations: [SelectPlanPage]
 })
-export class AccountPageModule {}
+export class SelectPlanPageModule {}

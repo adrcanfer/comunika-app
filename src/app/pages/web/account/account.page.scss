@@ -1,6 +1,10 @@
 .content {
-    max-width: 600px;
+    max-width: 670px;
     margin: auto;
+}
+
+ion-card {
+    color: black;
 }
 
 .initial-circle {
@@ -30,7 +34,6 @@
 }
 
 .statistic {
-    //width: 50%;
     flex: 1;
 }
 
@@ -43,4 +46,37 @@
 }
 .statistics-disclaimer {
     font-style: italic;
+}
+
+.plan-detail, .payments {
+    flex: 1;
+}
+
+.plan-detail ion-card, .payments ion-card {
+    height: 300px;
+}
+
+.plan-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.plan-content {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    text-align: left;
+
+    & li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.75rem;
+        font-size: 1rem;
+    }
+
+    & ion-icon {
+        margin-right: 0.5rem;
+        color: #10B981;
+    }
 }

@@ -11,21 +11,24 @@ export const Plans: any = {
         subscriptions: 2000,
         notifications: 100,
         ads: false,
-        price: 5.99
+        price: 5.99,
+        paymentUrl: 'https://buy.stripe.com/test_8x2fZgeHL1TnaH0dBvaIM00'
     },
     pro: {
         name: 'Pro',
         subscriptions: 10000,
         notifications: 100,
         ads: false,
-        price: 15.99
+        price: 15.99,
+        paymentUrl: 'https://buy.stripe.com/test_6oUbJ0fLP41vdTc0OJaIM01'
     },
     ultra: {
         name: 'Ultra',
         subscriptions: 'Ilimitado',
         notifications: 'Ilimitado',
         ads: false,
-        price: 45.99
+        price: 45.99,
+        paymentUrl: 'https://buy.stripe.com/test_6oU6oG7fj41v3ey1SNaIM02'
     },
 }
 
@@ -40,4 +43,5 @@ export interface PlanDetail {
     notifications: any;
     ads: boolean;
     price: number;
+    paymentUrl: string | undefined;
 }

@@ -15,6 +15,7 @@
 
     <div class="content ion-padding" *ngIf="account">
 
+      <!-- Source -->
       <div class="source">
         <ion-card>
           <div class="row flex-wrap justify-center ion-padding">
@@ -37,14 +38,14 @@
                   </ion-button>
                 </div>
               </div>
-              <div class="plan">
-                Plan: {{getPlan()}}
-              </div>
             </div>
           </div>
         </ion-card>
 
+        <!-- Statistics-->
         <div class="statistics row flex-wrap">
+
+          <!-- Subscriptors-->
           <div class="col statistic">
             <ion-card>
               <div class="text-center ion-padding">
@@ -62,7 +63,7 @@
               </div>
             </ion-card>
           </div>
-
+          <!-- Notifications -->
           <div class="col statistic">
             <ion-card>
               <div class="text-center ion-padding">
@@ -80,6 +81,43 @@
             </ion-card>
           </div>
         </div>
+
+        <!-- Plan and Payments -->
+        <div class="row flex-wrap">
+
+          <!-- Plan-->
+          <div class="col plan-detail" *ngIf="planDetail">
+            <ion-card>
+              <div class="text-center ion-padding">
+                <div class="card-title">Plan actual</div>
+                <div class="plan-title ion-padding-top">{{planDetail.name}}</div>
+                <div class="plan-content">
+                  <ul>
+                      <li><ion-icon name="checkmark-circle-outline"></ion-icon>{{planDetail.ads ? 'Con anuncios' : 'Sin anuncios' }}</li>
+                      <li><ion-icon name="checkmark-circle-outline"></ion-icon>{{planDetail.subscriptions == 'Ilimitado' ? 'Ilimitado' : 'Hasta ' + planDetail.subscriptions + ' suscriptores'}}</li>
+                      <li><ion-icon name="checkmark-circle-outline"></ion-icon> {{planDetail.notifications == 'Ilimitado' ? 'Ilimitado' : 'Hasta ' + planDetail.notifications + ' al mes'}}</li>
+                  </ul>
+                </div>
+
+                <div class="ion-padding">
+                  <ion-button color="secondary" shape="round" (click)="updatePlan()">Cambiar de plan</ion-button>
+                </div>
+              </div>
+            </ion-card>
+          </div>
+          <!-- Payments -->
+          <div class="col payments">
+            <ion-card>
+              <div class="text-center ion-padding">
+                <div class="card-title ion-padding-bottom">
+                  Pagos
+                </div>
+                
+              </div>
+            </ion-card>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

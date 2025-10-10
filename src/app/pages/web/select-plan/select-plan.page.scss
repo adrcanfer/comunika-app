@@ -1,0 +1,19 @@
+/* Estilos de las tarjetas de precios */
+.plan-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 600px) {
+    .plan-selector-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .plan-selector-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

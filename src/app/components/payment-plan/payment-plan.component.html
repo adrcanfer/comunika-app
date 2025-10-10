@@ -1,0 +1,18 @@
+<div class="pricing-card" [ngClass]="{ 'selected-plan': selected }">
+  <h2>{{plan.name}}</h2>
+  <ul class="pricing-features">
+      <li><ion-icon name="checkmark-circle-outline"></ion-icon>{{plan.ads ? 'Con anuncios' : 'Sin anuncios' }}</li>
+      <li><ion-icon name="checkmark-circle-outline"></ion-icon>{{plan.subscriptions == 'Ilimitado' ? 'Ilimitado' : 'Hasta ' + plan.subscriptions + ' suscriptores'}}</li>
+      <li><ion-icon name="checkmark-circle-outline"></ion-icon> {{plan.notifications == 'Ilimitado' ? 'Ilimitado' : 'Hasta ' + plan.notifications + ' al mes'}}</li>
+  </ul>
+  <div class="pricing-price">
+      <span class="price-value">{{plan.price}}€</span>
+      <span class="price-period">al mes</span>
+  </div>
+
+  <ng-container *ngIf="!readOnly">
+    <ion-button *ngIf="!selected" color="secondary" expand="block" shape="round" (click)="performAction()">Elegir plan</ion-button>
+    <ion-button *ngIf="selected" color="primary" disabled expand="block" shape="round">Plan actual</ion-button>  
+  </ng-container>
+ 
+</div>

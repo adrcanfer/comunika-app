@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ViewWillEnter } from '@ionic/angular';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { PlanDetail, Plans } from 'src/app/utils/plans';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class HomePage implements ViewWillEnter {
 
   showHeader: boolean = false;
+  plans: PlanDetail[] = Object.values(Plans);
 
   @ViewChild('firstContainer', { read: ElementRef }) firstContainer!: ElementRef;
 
@@ -32,8 +34,8 @@ export class HomePage implements ViewWillEnter {
     this.router.navigateByUrl("web/login");
   }
 
-  signup(plan: string) {
-    this.router.navigate(['web/signup'], { queryParams: { plan: plan } });
+  signup(plan: PlanDetail) {
+    this.router.navigate(['web/signup'], { queryParams: { plan: plan.name.toLowerCase() } });
   }
 
   onScroll(event: any) {

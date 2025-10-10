@@ -8,6 +8,7 @@ import { SourceEntryComponent } from './source-entry/source-entry.component';
 import { ImgMiniatureComponent } from './img-miniature/img-miniature.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { TextDialogComponent } from './text-dialog/text-dialog.component';
+import { PaymentPlanComponent } from './payment-plan/payment-plan.component';
 
 
 
@@ -19,7 +20,8 @@ import { TextDialogComponent } from './text-dialog/text-dialog.component';
     SourceEntryComponent, 
     ImgMiniatureComponent, 
     GalleryComponent,
-    TextDialogComponent
+    TextDialogComponent,
+    PaymentPlanComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { TextDialogComponent } from './text-dialog/text-dialog.component';
     SourceEntryComponent, 
     ImgMiniatureComponent, 
     GalleryComponent,
-    TextDialogComponent
+    TextDialogComponent,
+    PaymentPlanComponent
   ]
 })
 export class ComponentsModule { }

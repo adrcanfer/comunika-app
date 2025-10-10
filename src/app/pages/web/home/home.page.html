@@ -105,50 +105,7 @@
             </div>
             
             <div class="pricing-grid">
-                <!-- Tarjeta de plan gratuito -->
-                <div class="pricing-card">
-                    <h2>Free</h2>
-                    <ul class="pricing-features">
-                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Con anuncios</li>
-                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Hasta 1.000 suscriptores</li>
-                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> 10 notificaciones al mes</li>
-                    </ul>
-                    <div class="pricing-price">
-                        <span class="price-value">0€</span>
-                        <span class="price-period">al mes</span>
-                    </div>
-                    <ion-button expand="block" shape="round" (click)="signup('free')">Comenzar</ion-button>
-                </div>
-                
-                <!-- Tarjeta de plan Plus -->
-                <div class="pricing-card">
-                    <h2>Plus</h2>
-                    <ul class="pricing-features">
-                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Sin anuncios</li>
-                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Hasta 3.000 suscriptores</li>
-                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Notificaciones ilimitadas</li>
-                    </ul>
-                    <div class="pricing-price">
-                        <span class="price-value">9,90€</span>
-                        <span class="price-period">al mes</span>
-                    </div>
-                    <ion-button expand="block" color="secondary" shape="round" (click)="signup('plus')">Elegir plan</ion-button>
-                </div>
-                
-                <!-- Tarjeta de plan Pro -->
-                <div class="pricing-card">
-                    <h2>Pro</h2>
-                    <ul class="pricing-features">
-                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Sin anuncios</li>
-                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Suscriptores ilimitados</li>
-                        <li><ion-icon name="checkmark-circle-outline"></ion-icon> Notificaciones ilimitadas</li>
-                    </ul>
-                    <div class="pricing-price">
-                        <span class="price-value">29,90€</span>
-                        <span class="price-period">al mes</span>
-                    </div>
-                    <ion-button expand="block" color="secondary" shape="round" (click)="signup('pro')">Elegir plan</ion-button>
-                </div>
+                <app-payment-plan *ngFor="let p of plans" [plan]="p" [readOnly]="true" (doAction)="signup(p)"></app-payment-plan>
             </div>
         </div>
     </div>

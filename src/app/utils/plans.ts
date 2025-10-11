@@ -40,7 +40,7 @@ export const Plans: PlanDetail[] = [
 
 export function getPlanDetail(plan: string) {
     plan = plan != 'undefined' ? plan : 'free';
-    return Plans.find(x => x.id == plan);
+    return Plans.find(x => x.id == plan)!;
 }
 
 export interface PlanDetail {

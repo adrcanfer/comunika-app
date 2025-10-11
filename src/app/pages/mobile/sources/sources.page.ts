@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Preferences } from '@capacitor/preferences';
 import { ViewWillEnter } from '@ionic/angular';
 import { sortAlfaphetically, Source } from 'src/app/model/source.model';
+import { AdmobService } from 'src/app/services/admob.service';
 import { SourceService } from 'src/app/services/source.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { PreferenceConstants } from 'src/app/utils/preferences.util';
@@ -21,10 +22,13 @@ export class SourcesPage implements ViewWillEnter {
   constructor(
     private activedRouter: ActivatedRoute,
     private sourceService: SourceService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private admobService: AdmobService
   ) { }
 
   ionViewWillEnter() {
+    this.admobService.removeBanner();
+    
     this.action = this.activedRouter.snapshot.paramMap.get('action') ?? this.action;
     console.log(this.action);
 

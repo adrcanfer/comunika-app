@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewWillEnter } from '@ionic/angular';
 import { Event } from 'src/app/model/event.model';
@@ -31,7 +31,6 @@ export class EventPage implements ViewWillEnter {
   ionViewWillEnter() {
     const eventId = this.activatedRoute.snapshot.paramMap.get('eventId')!;
     this.getEvent(eventId);
-  
   }
 
   edit() {

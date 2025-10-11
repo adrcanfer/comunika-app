@@ -4,4 +4,5 @@
     <string name="title_activity_main">ComuniKame</string>
     <string name="package_name">com.adrcanfer.comunikame</string>
     <string name="custom_url_scheme">com.adrcanfer.comunikame</string>
+    <string name="admob_app_id">ca-app-pub-1989701015038681~8197453829</string>
 </resources>

@@ -9,6 +9,7 @@ import { FirebaseService } from './services/firebase.service';
 import { Browser } from '@capacitor/browser';
 import { Preferences } from '@capacitor/preferences';
 import { PreferenceConstants } from './utils/preferences.util';
+import { AdmobService } from './services/admob.service';
 
 @Component({
   selector: 'app-root',
@@ -30,12 +31,15 @@ export class AppComponent implements OnInit {
     private spinnerService: SpinnerService,
     private notificationService: NotificationService,
     private router: Router,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private admobService: AdmobService
   ) {
     this.loadMenuPages();
   }
 
   async ngOnInit() {
+    this.admobService.initialize();
+    
     //Cargamos la configuración del spinner
     this.spinnerService.$loading.subscribe(loading => {
       this.loading = loading;

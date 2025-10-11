@@ -1,8 +1,9 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ViewWillEnter } from '@ionic/angular';
 import { Event } from 'src/app/model/event.model';
+import { AdmobService } from 'src/app/services/admob.service';
 import { EventService } from 'src/app/services/event.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
@@ -20,10 +21,13 @@ export class EventPage implements ViewWillEnter {
     private eventService: EventService,
     private spinnerService: SpinnerService,
     private activedRouter: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private admobService: AdmobService
   ) { }
 
   ionViewWillEnter() {
+    this.admobService.showBanner(120);
+    
     const eventId = this.activedRouter.snapshot.paramMap.get('eventId')
     console.log(eventId);
 
@@ -34,7 +38,6 @@ export class EventPage implements ViewWillEnter {
         .finally(() => this.spinnerService.closeSpinner());
     }
   }
-
 
   back() {
     this.location.back();

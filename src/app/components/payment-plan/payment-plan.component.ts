@@ -12,6 +12,7 @@ export class PaymentPlanComponent  implements OnInit {
   @Input() plan!: PlanDetail;
   @Input() selected: boolean = false;
   @Input() readOnly: boolean = false;
+  @Input() update: boolean = false;
   @Output() doAction: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() { }

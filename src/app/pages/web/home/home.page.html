@@ -105,7 +105,7 @@
             </div>
             
             <div class="pricing-grid">
-                <app-payment-plan *ngFor="let p of plans" [plan]="p" [readOnly]="true" (doAction)="signup(p)"></app-payment-plan>
+                <app-payment-plan *ngFor="let p of plans" [plan]="p" [readOnly]="true" (doAction)="signup()"></app-payment-plan>
             </div>
         </div>
     </div>

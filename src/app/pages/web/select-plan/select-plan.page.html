@@ -21,7 +21,7 @@
       <div class="text-center ion-padding">Elige el plan que mejor se adapte a tus necesidades.</div>
 
       <div class="plan-selector-grid">
-        <app-payment-plan *ngFor="let p of plans" [plan]="p" [selected]="p.name == selectedPlan " (doAction)="selectPlan(p)"></app-payment-plan>
+        <app-payment-plan *ngFor="let p of plans" [plan]="p" [selected]="p.id == selectedPlan" [update]="selectedPlan != 'undefined'" (doAction)="selectPlan(p)"></app-payment-plan>
       </div>
     </div>
   </div>

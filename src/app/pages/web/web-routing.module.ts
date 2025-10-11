@@ -53,12 +53,19 @@ const routes: Routes = [
   },
   {
     path: 'account',
+    canActivate: [authGuard],
     loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
   },
   {
-    path: 'select-plan/:current-plan',
+    path: 'select-plan',
+    canActivate: [authGuard],
     loadChildren: () => import('./select-plan/select-plan.module').then( m => m.SelectPlanPageModule)
   },
+  {
+    path: 'select-plan/:current-plan',
+    canActivate: [authGuard],
+    loadChildren: () => import('./select-plan/select-plan.module').then( m => m.SelectPlanPageModule)
+  }
   
 ];
 

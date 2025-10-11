@@ -53,7 +53,7 @@
                   Suscriptores
                 </div>
                 <div class="row statistics-data ion-padding-bottom">
-                  <div style="padding-right: 4px;">{{account.subscriptors}}</div> de <div style="padding-left: 4px;">{{planDetail!.subscriptions!}}</div>
+                  <div style="padding-right: 4px;">{{account.subscriptors | number:'1.0-0':'es-ES'}}</div> de <div style="padding-left: 4px;">{{planDetail!.subscriptions! | number:'1.0-0':'es-ES'}}</div>
                 </div>
                 <div class="ion-padding-bottom">
                   <ion-progress-bar [value]="subscriptorsProgress"></ion-progress-bar>
@@ -71,7 +71,7 @@
                   Notificaciones
                 </div>
                 <div class="row statistics-data ion-padding-bottom">
-                  <div style="padding-right: 4px;">{{account.events}}</div> de <div style="padding-left: 4px;">{{planDetail!.notifications!}}</div>
+                  <div style="padding-right: 4px;">{{account.events | number:'1.0-0':'es-ES'}}</div> de <div style="padding-left: 4px;">{{planDetail!.notifications! | number:'1.0-0':'es-ES'}}</div>
                 </div>
                 <div class="ion-padding-bottom">
                   <ion-progress-bar [value]="notificationsProgress"></ion-progress-bar>
@@ -94,13 +94,13 @@
                 <div class="plan-content">
                   <ul>
                       <li><ion-icon name="checkmark-circle-outline"></ion-icon>{{planDetail.ads ? 'Con anuncios' : 'Sin anuncios' }}</li>
-                      <li><ion-icon name="checkmark-circle-outline"></ion-icon>{{planDetail.subscriptions == 'Ilimitado' ? 'Ilimitado' : 'Hasta ' + planDetail.subscriptions + ' suscriptores'}}</li>
-                      <li><ion-icon name="checkmark-circle-outline"></ion-icon> {{planDetail.notifications == 'Ilimitado' ? 'Ilimitado' : 'Hasta ' + planDetail.notifications + ' al mes'}}</li>
+                      <li><ion-icon name="checkmark-circle-outline"></ion-icon>{{planDetail.subscriptions == 'Ilimitado' ? 'Ilimitado' : 'Hasta ' + (planDetail.subscriptions | number:'1.0-0':'es-ES') + ' suscriptores'}}</li>
+                      <li><ion-icon name="checkmark-circle-outline"></ion-icon> {{planDetail.notifications == 'Ilimitado' ? 'Ilimitado' : 'Hasta ' + (planDetail.notifications | number:'1.0-0':'es-ES') + ' al mes'}}</li>
                   </ul>
                 </div>
 
                 <div class="ion-padding">
-                  <ion-button color="secondary" shape="round" (click)="updatePlan()">Cambiar de plan</ion-button>
+                  <ion-button color="secondary" shape="round" (click)="updatePlan()">Actualizar plan</ion-button>
                 </div>
               </div>
             </ion-card>
@@ -110,7 +110,21 @@
             <ion-card>
               <div class="text-center ion-padding">
                 <div class="card-title ion-padding-bottom">
-                  Pagos
+                  Últimas facturas
+                </div>
+
+                <div class="latest-transactions ion-padding-start ion-padding-end" *ngIf="transactions">
+                  <div class="transaction row" *ngFor="let t of transactions">
+                    <div class="transaction-date ion-padding-end col">{{ t.date * 1000 | date:'dd/MM/yyyy' }}</div>
+                    <div class="transaction-amount col">{{ t.amount / 100 | currency:'EUR':'symbol':'1.2-2':'es-ES'  }}</div>
+                    <div class="transaction-invoice ion-padding-start col">
+                      <ion-button (click)="downloadInvoice(t.invoice)"><ion-icon slot="icon-only" name="download"></ion-icon></ion-button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ion-padding">
+                  <ion-button color="secondary" shape="round" (click)="openPortalSession()">Ver más</ion-button>
                 </div>
                 
               </div>

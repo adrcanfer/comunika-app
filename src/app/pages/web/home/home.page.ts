@@ -34,8 +34,8 @@ export class HomePage implements ViewWillEnter {
     this.router.navigateByUrl("web/login");
   }
 
-  signup(plan: PlanDetail) {
-    this.router.navigate(['web/signup'], { queryParams: { plan: plan.name.toLowerCase() } });
+  signup() {
+    this.router.navigateByUrl('web/signup');
   }
 
   onScroll(event: any) {

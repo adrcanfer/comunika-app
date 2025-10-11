@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 import { ViewWillEnter } from '@ionic/angular';
 import { Account } from 'src/app/model/account.model';
 import { S3FileContent } from 'src/app/model/s3-file-content.model';
+import { Transaction } from 'src/app/model/transaction.model';
 import { UploadFileResponse } from 'src/app/model/upload-file-response.model';
 import { AlertService } from 'src/app/services/alert.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { FileService } from 'src/app/services/file.service';
+import { PaymentService } from 'src/app/services/payment.service';
 import { SourceService } from 'src/app/services/source.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { getPlanDetail, PlanDetail } from 'src/app/utils/plans';
@@ -23,18 +25,20 @@ export class AccountPage implements ViewWillEnter {
   planDetail?: PlanDetail;
   subscriptorsProgress: number = 0;
   notificationsProgress: number = 0;
-
+  transactions?: Transaction[];
   constructor(
     private sourceService: SourceService,
     private spinnerService: SpinnerService,
     private alertService: AlertService,
     private dialogService: DialogService,
     private fileService: FileService,
+    private paymentService: PaymentService,
     private router: Router
   ) { }
 
   ionViewWillEnter() {
     this.getAccount();
+    this.getTransactions();
   }
 
   getPlan() {
@@ -51,6 +55,14 @@ export class AccountPage implements ViewWillEnter {
     if(this.planDetail!.notifications != 'Ilimitado') {
       this.notificationsProgress = this.account!.events / this.planDetail!.notifications;
     }
+  }
+
+  getTransactions() {
+    this.spinnerService.showSpinner();
+    this.paymentService.getTransactions()
+      .then(data => this.transactions = data.transactions)
+      .catch(e => console.error(e))
+      .finally(() => this.spinnerService.closeSpinner());
   }
 
   async editName() {
@@ -93,7 +105,19 @@ export class AccountPage implements ViewWillEnter {
   }
 
   updatePlan() {
-    this.router.navigateByUrl("/web/select-plan/" + this.planDetail!.name);
+    this.router.navigateByUrl("/web/select-plan/" + this.planDetail!.id);
+  }
+
+  openPortalSession() {
+    this.spinnerService.showSpinner();
+    this.paymentService.getPortalSessionUrl()
+      .then((d) => window.open(d.sessionUrl, '_self'))
+      .catch(e => console.error(e))
+      .finally(() => this.spinnerService.closeSpinner());
+  }
+
+  downloadInvoice(url: string) {
+    window.open(url, '_blank')
   }
 
   private getAccount() {

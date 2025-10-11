@@ -16,7 +16,7 @@ import { PlanDetail, Plans } from 'src/app/utils/plans';
 })
 export class SelectPlanPage implements OnInit {
 
-  plans: PlanDetail[] = Object.values(Plans);
+  plans: PlanDetail[] = Plans;
   account!: Account;
   selectedPlan!: string;
 

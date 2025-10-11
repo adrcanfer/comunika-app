@@ -13,7 +13,7 @@ import { PlanDetail, Plans } from 'src/app/utils/plans';
 export class HomePage implements ViewWillEnter {
 
   showHeader: boolean = false;
-  plans: PlanDetail[] = Object.values(Plans);
+  plans: PlanDetail[] = Plans;
 
   @ViewChild('firstContainer', { read: ElementRef }) firstContainer!: ElementRef;
 

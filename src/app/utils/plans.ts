@@ -1,5 +1,5 @@
-export const Plans: any = {
-    prod_TD6FrAGsjKAIPt: {
+export const Plans: PlanDetail[] = [
+    {
         id: 'prod_TD6FrAGsjKAIPt',
         name: 'Free',
         subscriptions: 10,
@@ -8,7 +8,7 @@ export const Plans: any = {
         price: 0,
         paymentUrl: 'https://buy.stripe.com/test_28E3cu0QVdC58ySapjaIM03?locked_prefilled_email='
     },
-    prod_T8Auz8GR1zK0yD: {
+    {
         id: 'prod_T8Auz8GR1zK0yD',
         name: 'Plus',
         subscriptions: 2000,
@@ -17,7 +17,7 @@ export const Plans: any = {
         price: 5.99,
         paymentUrl: 'https://buy.stripe.com/test_8x2fZgeHL1TnaH0dBvaIM00?locked_prefilled_email='
     },
-    prod_T9n2LrKP7a1aw8: {
+    {
         id: 'prod_T9n2LrKP7a1aw8',
         name: 'Pro',
         subscriptions: 10000,
@@ -26,7 +26,7 @@ export const Plans: any = {
         price: 15.99,
         paymentUrl: 'https://buy.stripe.com/test_6oUbJ0fLP41vdTc0OJaIM01?locked_prefilled_email='
     },
-    prod_T9n6jlnVkNrc9x: {
+    {
         id: 'prod_T9n6jlnVkNrc9x',
         name: 'Ultra',
         subscriptions: 'Ilimitado',
@@ -34,12 +34,13 @@ export const Plans: any = {
         ads: false,
         price: 45.99,
         paymentUrl: 'https://buy.stripe.com/test_6oU6oG7fj41v3ey1SNaIM02?locked_prefilled_email='
-    },
-}
+    }
+]
+
 
 export function getPlanDetail(plan: string) {
     plan = plan != 'undefined' ? plan : 'free';
-    return Plans[plan];
+    return Plans.find(x => x.id == plan);
 }
 
 export interface PlanDetail {

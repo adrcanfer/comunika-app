@@ -5,6 +5,9 @@ PODS:
     - Capacitor
   - CapacitorBrowser (7.0.2):
     - Capacitor
+  - CapacitorCommunityAdmob (6.2.0):
+    - Capacitor
+    - Google-Mobile-Ads-SDK (= 11.3.0)
   - CapacitorCommunityMedia (8.0.1):
     - Capacitor
     - SDWebImage
@@ -44,9 +47,12 @@ PODS:
     - GoogleUtilities/Reachability (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - nanopb (~> 3.30910.0)
+  - Google-Mobile-Ads-SDK (11.3.0):
+    - GoogleUserMessagingPlatform (>= 1.1)
   - GoogleDataTransport (10.1.0):
     - nanopb (~> 3.30910.0)
     - PromisesObjC (~> 2.4)
+  - GoogleUserMessagingPlatform (2.7.0)
   - GoogleUtilities/AppDelegateSwizzler (8.0.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -86,6 +92,7 @@ DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
   - "CapacitorBrowser (from `../../node_modules/@capacitor/browser`)"
+  - "CapacitorCommunityAdmob (from `../../node_modules/@capacitor-community/admob`)"
   - "CapacitorCommunityMedia (from `../../node_modules/@capacitor-community/media`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorFilesystem (from `../../node_modules/@capacitor/filesystem`)"
@@ -103,7 +110,9 @@ SPEC REPOS:
     - FirebaseCoreInternal
     - FirebaseInstallations
     - FirebaseMessaging
+    - Google-Mobile-Ads-SDK
     - GoogleDataTransport
+    - GoogleUserMessagingPlatform
     - GoogleUtilities
     - IONFilesystemLib
     - nanopb
@@ -117,6 +126,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/app"
   CapacitorBrowser:
     :path: "../../node_modules/@capacitor/browser"
+  CapacitorCommunityAdmob:
+    :path: "../../node_modules/@capacitor-community/admob"
   CapacitorCommunityMedia:
     :path: "../../node_modules/@capacitor-community/media"
   CapacitorCordova:
@@ -140,6 +151,7 @@ SPEC CHECKSUMS:
   Capacitor: 156d98aba46ec01dde72c4bbb92fa626837cad29
   CapacitorApp: efc1e9748a8ea5d3e789cd82a4f451341cc7ac93
   CapacitorBrowser: 45c681e7abc3b4384e54eb52bafeef1347d98fa8
+  CapacitorCommunityAdmob: cb648c28df51906e1750ee9ddec1780a651a36db
   CapacitorCommunityMedia: a3ee57c1452d352d8013e5bff2668f7154b379a4
   CapacitorCordova: 5e58d04631bc5094894ac106e2bf1da18a9e6151
   CapacitorFilesystem: ac0a386949ed6c295a3dffa129ecd26b881ae5be
@@ -153,13 +165,15 @@ SPEC CHECKSUMS:
   FirebaseCoreInternal: d98ab91e2d80a56d7b246856a8885443b302c0c2
   FirebaseInstallations: efc0946fc756e4d22d8113f7c761948120322e8c
   FirebaseMessaging: e1aca1fcc23e8b9eddb0e33f375ff90944623021
+  Google-Mobile-Ads-SDK: 301a16c461c331ba34ff4dab40a22ab7c147af61
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
+  GoogleUserMessagingPlatform: a8b56893477f67212fbc8411c139e61d463349f5
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
   IONFilesystemLib: 89258b8e3e85465da93127d25d7ce37f977e8a6f
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   SDWebImage: f29024626962457f3470184232766516dee8dfea
 
-PODFILE CHECKSUM: a8e60233c9379bfcac9f14a5081bf6813034d882
+PODFILE CHECKSUM: 74d6878778cf6f16b8e5baf451a91ba1267c4a36
 
 COCOAPODS: 1.15.2

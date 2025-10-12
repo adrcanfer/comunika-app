@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { SpinnerService } from './services/spinner.service';
-import { NotificationService } from './services/notification.service';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { App, URLOpenListenerEvent } from '@capacitor/app';
+import { Browser } from '@capacitor/browser';
+import { Preferences } from '@capacitor/preferences';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { FirebaseService } from './services/firebase.service';
-import { Browser } from '@capacitor/browser';
-import { Preferences } from '@capacitor/preferences';
-import { PreferenceConstants } from './utils/preferences.util';
 import { AdmobService } from './services/admob.service';
+import { FirebaseService } from './services/firebase.service';
+import { NotificationService } from './services/notification.service';
+import { SpinnerService } from './services/spinner.service';
+import { PreferenceConstants } from './utils/preferences.util';
+import { AlertService } from './services/alert.service';
 
 @Component({
   selector: 'app-root',
@@ -31,14 +33,20 @@ export class AppComponent implements OnInit {
     private spinnerService: SpinnerService,
     private notificationService: NotificationService,
     private router: Router,
+    private zone: NgZone,
     private firebaseService: FirebaseService,
-    private admobService: AdmobService
+    private admobService: AdmobService,
+    private alertService: AlertService
   ) {
     this.loadMenuPages();
   }
 
   async ngOnInit() {
+    //Cargamos la configuración de los anuncios
     this.admobService.initialize();
+
+    //Cargamos la configuración de los applinks
+    this.initAppLink();
     
     //Cargamos la configuración del spinner
     this.spinnerService.$loading.subscribe(loading => {
@@ -54,7 +62,6 @@ export class AppComponent implements OnInit {
       this.showMenuIcon(event.url);
     });
 
-    // IMPORTANTE -> AL FINAL
     //Cargamos la configuración para las pushes si estamos en modo app
     if (environment.mode === 'app') {
       setTimeout(async () => {
@@ -110,6 +117,18 @@ export class AppComponent implements OnInit {
         { title: 'Mi Cuenta', url: '/web/account', icon: 'person' }
       ];
     }
+  }
+
+  private initAppLink() {
+    App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
+      this.zone.run(async () => {
+        const url = new URL(event.url);
+        console.log(url);
+
+        const path = url.pathname.replace("web", "mobile");
+        this.router.navigateByUrl(path);
+      });
+    });
   }
 
 }

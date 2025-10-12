@@ -1,6 +1,5 @@
-import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ViewWillEnter } from '@ionic/angular';
 import { Event } from "src/app/model/event.model";
 import { AdmobService } from 'src/app/services/admob.service';
@@ -26,7 +25,7 @@ export class EventsPage implements ViewWillEnter {
     private activedRouter: ActivatedRoute,
     private spinnerService: SpinnerService,
     private eventService: EventService,
-    private location: Location,
+    private router: Router,
     private admobService: AdmobService
   ) { }
 
@@ -51,7 +50,7 @@ export class EventsPage implements ViewWillEnter {
   }
 
   back() {
-    this.location.back();
+    this.router.navigateByUrl('/mobile/sources/events');
   }
 
   private getEvents(first: boolean = true, refresh: boolean = false, event?: any) {

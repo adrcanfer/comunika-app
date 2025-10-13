@@ -19,6 +19,11 @@ export class SourceService {
     return this.apiService.doGet(url);
   }
 
+  // Método encargado de buscar el source por shortId
+  getSourceByShortId(shortId: string): Promise<Sources> {
+    let url = `source/short-id/${shortId}`;
+    return this.apiService.doGet(url);
+  }
   // Método encargado de recuperar los sources
   getSourcesBatch(sourceIds: string): Promise<Sources> {
     let url = `source/batch/search`;

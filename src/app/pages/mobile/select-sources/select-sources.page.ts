@@ -54,7 +54,11 @@ export class SelectSourcesPage implements ViewWillEnter {
   search() {
     if (this.searchKey.length > 0) {
       this.spinnerService.showSpinner();
-      this.sourceService.getSources(this.searchKey)
+
+      const sourcesPromise = this.searchKey.startsWith('#') 
+        ? this.sourceService.getSourceByShortId(this.searchKey.substring(1))
+        : this.sourceService.getSources(this.searchKey);
+      sourcesPromise
         .then(value => {
           this.sources = new Map();
           value.items.forEach(s => this.sources.set(s.id!, s));

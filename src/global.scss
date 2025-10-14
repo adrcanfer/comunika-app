@@ -37,6 +37,10 @@
 //@import "@ionic/angular/css/palettes/dark.system.css";
 
 //==============BASIC===============
+.text-start {
+    text-align: start;
+}
+
 .text-center {
     text-align: center;
 }
@@ -81,6 +85,15 @@
 
 .justify-center {
     justify-content: center;
+}
+
+.justify-end {
+    justify-content: end;
+}
+
+.disclaimer {
+    color: var(--ion-color-step-700, var(--ion-text-color-step-300, #4d4d4d));
+    font-size: 12px;
 }
 //===============AUX================
 ion-card {

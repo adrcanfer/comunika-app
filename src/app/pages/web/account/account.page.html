@@ -38,6 +38,23 @@
                   </ion-button>
                 </div>
               </div>
+              <div class="account-description text-start">
+                <div class="row">
+                  Identificador: <span class="ion-padding-start short-id"> #{{account.source!.shortId}}</span>
+                </div>
+                <div class="row ion-padding-bottom disclaimer">
+                  Usado para ser encontrado en la app (Cuentas privadas).
+                </div>
+                <div class="row ion-padding-bottom">
+                  Correo: <span class="ion-padding-start short-id"> {{account.source!.email}}</span>
+                </div>
+                <div class="row ion-padding-bottom">
+                  <ion-toggle [checked]="account.source!.public" (ionChange)="updatePublicFlag($event)"
+                    helperText="Las cuentas públicas podrán ser buscadas en la app." justify="space-between">
+                    Cuenta pública
+                  </ion-toggle>
+                </div>
+              </div>
             </div>
           </div>
         </ion-card>
@@ -53,12 +70,16 @@
                   Suscriptores
                 </div>
                 <div class="row statistics-data ion-padding-bottom">
-                  <div style="padding-right: 4px;">{{account.subscriptors | number:'1.0-0':'es-ES'}}</div> de <div style="padding-left: 4px;">{{planDetail!.subscriptions! | number:'1.0-0':'es-ES'}}</div>
+                  <div style="padding-right: 4px;">{{account.subscriptors | number:'1.0-0':'es-ES'}}</div> de 
+                  <div style="padding-left: 4px;">
+                    <ng-container *ngIf="planDetail!.subscriptions != 'Ilimitado'">{{planDetail!.subscriptions! | number:'1.0-0':'es-ES'}}</ng-container>
+                    <ng-container *ngIf="planDetail!.subscriptions == 'Ilimitado'">Ilimitado</ng-container>
+                  </div>
                 </div>
                 <div class="ion-padding-bottom">
                   <ion-progress-bar [value]="subscriptorsProgress"></ion-progress-bar>
                 </div>
-                <div class="statistics-disclaimer ion-padding-top">* Número de subscriptores totales.</div>
+                <div class="disclaimer ion-padding-top">Número de subscriptores totales.</div>
   
               </div>
             </ion-card>
@@ -71,12 +92,16 @@
                   Notificaciones
                 </div>
                 <div class="row statistics-data ion-padding-bottom">
-                  <div style="padding-right: 4px;">{{account.events | number:'1.0-0':'es-ES'}}</div> de <div style="padding-left: 4px;">{{planDetail!.notifications! | number:'1.0-0':'es-ES'}}</div>
+                  <div style="padding-right: 4px;">{{account.events | number:'1.0-0':'es-ES'}}</div> de 
+                  <div style="padding-left: 4px;">
+                    <ng-container *ngIf="planDetail!.notifications != 'Ilimitado'">{{planDetail!.notifications! | number:'1.0-0':'es-ES'}}</ng-container>
+                    <ng-container *ngIf="planDetail!.notifications == 'Ilimitado'">Ilimitado</ng-container>
+                  </div>
                 </div>
                 <div class="ion-padding-bottom">
                   <ion-progress-bar [value]="notificationsProgress"></ion-progress-bar>
                 </div>
-                <div class="statistics-disclaimer ion-padding-top">* Número de notificaciones enviadas en el mes actual.</div>
+                <div class="disclaimer ion-padding-top">Número de notificaciones enviadas en el mes actual.</div>
               </div>
             </ion-card>
           </div>

@@ -46,13 +46,13 @@ export class AccountPage implements ViewWillEnter {
   }
 
   getSubscriptorsProgress() {
-    if(this.planDetail!.subscriptions != 'Ilimitado') {
+    if (this.planDetail!.subscriptions != 'Ilimitado') {
       this.subscriptorsProgress = this.account!.subscriptors / this.planDetail!.subscriptions!;
     }
   }
 
   getNotificationsProgress() {
-    if(this.planDetail!.notifications != 'Ilimitado') {
+    if (this.planDetail!.notifications != 'Ilimitado') {
       this.notificationsProgress = this.account!.events / this.planDetail!.notifications;
     }
   }
@@ -75,8 +75,8 @@ export class AccountPage implements ViewWillEnter {
       this.sourceService.putSource(this.account?.source!)
         .catch(e => console.error(e))
         .finally(() => {
-          this.spinnerService.closeSpinner(); 
-        });      
+          this.spinnerService.closeSpinner();
+        });
     }
   }
 
@@ -84,7 +84,7 @@ export class AccountPage implements ViewWillEnter {
     const selectedFiles: any[] = event.target.files;
     const selectedFile: any = selectedFiles.length == 1 ? event.target.files[0] : undefined;
 
-    if(selectedFile) {
+    if (selectedFile) {
       // Leemos el fichero
       const reader = new FileReader();
 
@@ -120,6 +120,19 @@ export class AccountPage implements ViewWillEnter {
     window.open(url, '_blank')
   }
 
+  updatePublicFlag(event: any) {
+    console.log(event.target.checked);
+
+    this.spinnerService.showSpinner();
+    this.account!.source.public = event.target.checked;
+
+    this.sourceService.putSource(this.account?.source!)
+      .catch(e => console.error(e))
+      .finally(() => {
+        this.spinnerService.closeSpinner();
+      });
+  }
+
   private getAccount() {
     this.spinnerService.showSpinner();
     this.sourceService.getAccount()
@@ -144,7 +157,7 @@ export class AccountPage implements ViewWillEnter {
         //Guardamos la imagen del source
         this.updateSourcePicture(url);
 
-        if(oldIcon) {
+        if (oldIcon) {
           this.deleteFile(oldIcon);
         }
 
@@ -159,11 +172,11 @@ export class AccountPage implements ViewWillEnter {
 
     this.account!.source.icon = url;
     this.sourceService.putSource(this.account?.source!)
-        .catch(e => console.error(e))
-        .finally(() => {
-          this.spinnerService.closeSpinner(); 
-        }); 
-  } 
+      .catch(e => console.error(e))
+      .finally(() => {
+        this.spinnerService.closeSpinner();
+      });
+  }
 
   private async deleteFile(url: string) {
     const urlParts = url.split('/');
@@ -171,12 +184,12 @@ export class AccountPage implements ViewWillEnter {
 
     this.spinnerService.showSpinner();
     this.fileService.deleteFile(key).then(() => {
-      
+
     }).catch(e => {
       console.error(e);
     }).finally(() => this.spinnerService.closeSpinner());
   }
 
-  
+
 
 }

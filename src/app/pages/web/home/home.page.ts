@@ -1,5 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ViewWillEnter } from '@ionic/angular';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { PlanDetail, Plans } from 'src/app/utils/plans';
 
 @Component({
   selector: 'app-home',
@@ -7,24 +10,32 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.page.scss'],
   standalone: false
 })
-export class HomePage implements OnInit {
+export class HomePage implements ViewWillEnter {
 
   showHeader: boolean = false;
+  plans: PlanDetail[] = Plans;
 
   @ViewChild('firstContainer', { read: ElementRef }) firstContainer!: ElementRef;
 
   constructor(
+    private firebaseService: FirebaseService,
     private router: Router
   ) { }
 
-  ngOnInit() {}
+  async ionViewWillEnter() {
+    const loogedUser = await this.firebaseService.getLoggedUser();
+
+    if(loogedUser) {
+      this.router.navigateByUrl("/web/my-events");
+    }
+  }
 
   login() {
     this.router.navigateByUrl("web/login");
   }
 
-  signup(plan: string) {
-    this.router.navigate(['web/signup'], { queryParams: { plan: plan } });
+  signup() {
+    this.router.navigateByUrl('web/signup');
   }
 
   onScroll(event: any) {

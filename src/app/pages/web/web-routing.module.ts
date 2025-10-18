@@ -51,6 +51,21 @@ const routes: Routes = [
     path: 'privacy-policy',
     loadChildren: () => import('./privacy-policy/privacy-policy.module').then( m => m.PrivacyPolicyPageModule)
   },
+  {
+    path: 'account',
+    canActivate: [authGuard],
+    loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
+  },
+  {
+    path: 'select-plan',
+    canActivate: [authGuard],
+    loadChildren: () => import('./select-plan/select-plan.module').then( m => m.SelectPlanPageModule)
+  },
+  {
+    path: 'select-plan/:current-plan',
+    canActivate: [authGuard],
+    loadChildren: () => import('./select-plan/select-plan.module').then( m => m.SelectPlanPageModule)
+  }
   
 ];
 

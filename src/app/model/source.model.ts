@@ -4,8 +4,10 @@ export interface Source {
     email: string;
     icon?: string;
     public: boolean;
-    plan?: string; //'free'
+    customerId?: string;
+    plan?: string; //productId
     lastUpdate?: number;
+    shortId?: string;
 
     //Aux
     selected?: boolean;

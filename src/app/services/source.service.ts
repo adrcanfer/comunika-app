@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Sources } from '../model/sources.model';
 import { Source } from '../model/source.model';
+import { Account } from '../model/account.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,11 @@ export class SourceService {
     return this.apiService.doGet(url);
   }
 
+  // Método encargado de buscar el source por shortId
+  getSourceByShortId(shortId: string): Promise<Sources> {
+    let url = `source/short-id/${shortId}`;
+    return this.apiService.doGet(url);
+  }
   // Método encargado de recuperar los sources
   getSourcesBatch(sourceIds: string): Promise<Sources> {
     let url = `source/batch/search`;
@@ -29,5 +35,17 @@ export class SourceService {
   postSource(source: Source): Promise<void> {
     let url = `source`;
     return this.apiService.doPost(url, source);
+  }
+
+  // Método encargado de crear un source
+  putSource(source: Source): Promise<void> {
+    let url = `source`;
+    return this.apiService.doPut(url, source);
+  }
+
+  // Método encargado de recuperar la cuenta
+  getAccount(): Promise<Account> {
+    let url = `account`;
+    return this.apiService.doGet(url);
   }
 }

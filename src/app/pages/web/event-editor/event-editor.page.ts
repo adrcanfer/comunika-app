@@ -126,7 +126,6 @@ export class EventEditorPage implements ViewWillEnter {
       }
 
       reader.readAsDataURL(f);
-
     }
   }
 

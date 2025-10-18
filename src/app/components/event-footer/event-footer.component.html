@@ -12,7 +12,7 @@
     </div>
     <div class="row" *ngIf="event.showStats || ownerMode">
       <ion-icon class="read-icon" name="eye-outline"></ion-icon>
-      {{event.read}}
+      {{event.read | number:'1.0-0':'es-ES'}}
     </div>
   </div>
 </div>

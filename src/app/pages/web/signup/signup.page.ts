@@ -71,7 +71,7 @@ export class SignupPage implements ViewWillEnter{
           this.public = true;
   
           this.loginError = undefined;
-          this.router.navigateByUrl('web/my-events');
+          this.router.navigateByUrl('web/select-plan');
         }).catch(async (e) => {
           console.error(e); 
           this.loginError="Se ha producido un error. Por favor, inténtelo de nuevo más tarde.";

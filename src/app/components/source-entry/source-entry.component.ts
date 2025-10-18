@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Source } from 'src/app/model/source.model';
+import { AdmobService } from 'src/app/services/admob.service';
+import { getPlanDetail } from 'src/app/utils/plans';
 
 @Component({
   selector: 'app-source-entry',
@@ -14,12 +16,16 @@ export class SourceEntryComponent  implements OnInit {
   @Input() action : string = 'notifications'
 
   constructor(
-    private router: Router
+    private router: Router,
+    private admobService: AdmobService
   ) { }
 
   ngOnInit() {}
 
   showDetail() {
+    const plan = getPlanDetail(this.source.plan!);
+    this.admobService.isFreeAccount(plan.ads);
+    
     this.router.navigateByUrl(`/mobile/${this.action}/${this.source.id}`);
   }
 

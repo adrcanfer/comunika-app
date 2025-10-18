@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ViewWillEnter } from '@ionic/angular';
 import { Event } from "src/app/model/event.model";
 import { EventService } from 'src/app/services/event.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { SourceService } from 'src/app/services/source.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
@@ -23,7 +24,9 @@ export class EventsPage implements ViewWillEnter {
 
   constructor(
     private firebaseService: FirebaseService,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
+    private sourceService: SourceService,
     private eventService: EventService,
     private spinnerService: SpinnerService
   ) { }
@@ -37,6 +40,15 @@ export class EventsPage implements ViewWillEnter {
     } else {
       const uuid = await this.firebaseService.getLoggedUserId();
       this.sourceId = uuid!;
+
+      //Si el usuario esta logado comprobamos el plan
+      this.spinnerService.showSpinner();
+      const account = await this.sourceService.getAccount();
+      if(account.source.plan == "undefined") {
+        this.router.navigateByUrl("/web/select-plan");
+      }
+      this.spinnerService.closeSpinner();
+
       this.loggedUser = true;
     }
 

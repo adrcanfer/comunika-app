@@ -19,6 +19,8 @@
         </ion-input>
     </div>
 
+    <div *ngIf="searchKey.length == 0 && !sourcesToShow" class="ion-padding">Busca tus fuentes por nombre ("ComuniKame") o por su identificador ("#77777K")</div>
+
     <div class="search-content ion-padding" *ngIf="sourcesToShow">
       <ion-list lines="none">
         <ng-container *ngFor="let s of sourcesToShow">

@@ -21,7 +21,7 @@ export class SelectSourcesPage implements ViewWillEnter {
   sourcesToShow?: Source[];
   showSaveButton = false;
 
-  private sources: Map<string, Source> = new Map();
+  private sources?: Map<string, Source>;
   private selectedSources: Map<string, Source> = new Map();
   private savedSources: Map<string, Source> = new Map();
 
@@ -37,7 +37,6 @@ export class SelectSourcesPage implements ViewWillEnter {
     this.searchKey = '';
     this.savedSources = new Map();
     this.selectedSources = new Map();
-    this.sources = new Map();
 
     //Recuperar los elementos guardados de las preferencias
     await this.loadSavedSubscriptions();
@@ -47,7 +46,7 @@ export class SelectSourcesPage implements ViewWillEnter {
 
   searchInput(event: any) {
     this.searchKey = event.detail.value;
-    this.sources = new Map();
+    this.sources = undefined;
     this.processSources();
   }
 
@@ -61,10 +60,12 @@ export class SelectSourcesPage implements ViewWillEnter {
       sourcesPromise
         .then(value => {
           this.sources = new Map();
-          value.items.forEach(s => this.sources.set(s.id!, s));
+          value.items.forEach(s => this.sources!.set(s.id!, s));
           this.processSources();
         })
         .finally(() => this.spinnerService.closeSpinner());
+    } else {
+      this.sources = undefined;
     }
   }
 
@@ -79,23 +80,25 @@ export class SelectSourcesPage implements ViewWillEnter {
   }
 
   private processSources() {
-    if (this.selectedSources.size == 0 && this.sources.size == 0) {
+    if (this.selectedSources.size == 0 && !this.sources) {
       this.sourcesToShow = undefined;
+    } else if(this.selectedSources.size == 0 && this.sources!.size == 0) {
+      this.sourcesToShow = [];
     } else {
       this.sourcesToShow = [];
 
       //Marcamos los sources seleccionados
-      this.sources.forEach(s => s.selected = this.selectedSources.has(s.id!));
+      this.sources?.forEach(s => s.selected = this.selectedSources.has(s.id!));
 
       //Añadimos solos los sources seleccionados que no se encuentran en la busqueda
       this.selectedSources.forEach(s => {
-        if (!this.sources.has(s.id!)) {
+        if (!this.sources || !this.sources!.has(s.id!)) {
           this.sourcesToShow!.push(s);
         }
       });
 
       //Añadimos los sources
-      this.sourcesToShow.push(...this.sources.values());
+      this.sourcesToShow.push(...this.sources!.values());
 
     }
 

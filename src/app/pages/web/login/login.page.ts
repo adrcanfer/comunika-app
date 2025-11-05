@@ -56,11 +56,12 @@ export class LoginPage implements OnInit {
       case 'auth/user-not-found':
       case 'auth/invalid-credential':
       case 'auth/wrong-password':
+      case 'auth/invalid-email':
         return 'Usuario o contraseña inválida';
       case 'auth/user-disabled':
         return 'La cuenta se encuentra deshabilitada';
       default:
-        return code;
+        return "Se ha producido un error: " + code;
     }
   }
 

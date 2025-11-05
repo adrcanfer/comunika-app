@@ -95,9 +95,10 @@ export class SignupPage implements ViewWillEnter{
   private translateAuthError(code: string) {
     switch (code) {
       case 'auth/email-already-in-use':
-        return 'El correo usado ya se encuentra en uso';
+      case 'auth/invalid-email':
+        return 'El correo ya se encuentra en uso';
       default:
-        return code;
+        return "Se ha producido un error: " + code;
     }
   }
 }

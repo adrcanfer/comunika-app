@@ -12,19 +12,23 @@
 <ion-content>
   <div class="content ion-padding">
     <div class="search-input ion-padding">
-        <ion-input fill="outline" placeholder="Buscar fuentes" type="text" mode="md" [value]="searchKey" (ionInput)="searchInput($event)" (keyup.enter)="search()">
-          <ion-button fill="clear" slot="end" (click)="search()">
-            <ion-icon slot="icon-only" name="search"></ion-icon>
-          </ion-button>
-        </ion-input>
+      <ion-input fill="outline" placeholder="Buscar fuentes" type="text" mode="md"
+        [errorText]="searchError"
+        [formControl]="searchFormControl" (ionInput)="searchInput()" (keyup.enter)="search()">
+        <ion-button fill="clear" slot="end" (click)="search()">
+          <ion-icon slot="icon-only" name="search"></ion-icon>
+        </ion-button>
+      </ion-input>
     </div>
+
+    <div *ngIf="searchFormControl.value.length == 0 && !sourcesToShow" class="ion-padding">Busca tus fuentes por nombre ("ComuniKame") o por su identificador ("#77777K")</div>
 
     <div class="search-content ion-padding" *ngIf="sourcesToShow">
       <ion-list lines="none">
         <ng-container *ngFor="let s of sourcesToShow">
           <app-source-item [source]="s" [selectable]="true" (updatedElement)="updateSourceElement($event)"></app-source-item>
         </ng-container>
-        <div *ngIf="sourcesToShow.length == 0">No se ha encontrado ninguna fuente por '{{searchKey}}'</div>
+        <div *ngIf="sourcesToShow.length == 0">No se ha encontrado ninguna fuente por '{{searchFormControl.value}}'</div>
       </ion-list>
     </div>
 

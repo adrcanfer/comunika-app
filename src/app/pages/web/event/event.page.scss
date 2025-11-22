@@ -19,3 +19,46 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+
+/* Share buttons brand colors */
+.share-btn {
+  --border-radius: 999px;
+  --padding-start: 0.6rem;
+  --padding-end: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.share-btn ion-icon {
+  color: inherit;
+}
+
+.share-btn.facebook {
+  /* Facebook blue */
+  --background: #1877F2;
+  --border-color: #1877F2;
+  --color: #ffffff; /* icon/text */
+}
+
+.share-btn.linkedin {
+  /* LinkedIn blue */
+  --background: #0A66C2;
+  --border-color: #0A66C2;
+  --color: #ffffff;
+}
+
+.share-btn.x {
+  /* X (brand uses black, use black background) */
+  --background: #000000;
+  --border-color: #000000;
+  --color: #ffffff;
+}
+
+.share-btn.whatsapp {
+  /* WhatsApp green */
+  --background: #25D366;
+  --border-color: #25D366;
+  --color: #ffffff;
+}

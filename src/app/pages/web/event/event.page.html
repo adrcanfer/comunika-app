@@ -12,7 +12,7 @@
 <ion-content>
   <div class="container fit-container ion-padding" *ngIf="event">
     <div class="ion-padding">
-      <div class="create-btn text-end ion-padding-bottom">
+      <div class="text-end ion-padding-bottom">
         <ion-button class="margin-right" fill="outline" shape="round" (click)="back()">Volver</ion-button>
         <ion-button *ngIf="ownerMode" shape="round" class="ion-padding-end" color="secondary" (click)="edit()">
           <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
@@ -30,6 +30,27 @@
 
       <div *ngIf="event.attachments.length > 0">
         <app-gallery [attachments]="event.attachments" [editMode]="false"></app-gallery>
+      </div>
+
+
+      <div class="ion-padding">
+        <div class="font-weight-bold text-center ion-padding">
+          Compartir en: 
+        </div>
+        <div class="text-center ion-padding-bottom">
+          <ion-button fill="solid" shape="round" class="ion-padding-end share-btn facebook" (click)="shareIn('facebook')">
+            <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
+          </ion-button>
+          <ion-button fill="solid" shape="round" class="ion-padding-end share-btn linkedin" (click)="shareIn('linkedin')">
+            <ion-icon slot="icon-only" name="logo-linkedin"></ion-icon>
+          </ion-button>
+          <ion-button fill="solid" shape="round" class="ion-padding-end share-btn x" (click)="shareIn('x')">
+            <ion-icon slot="icon-only" name="logo-x"></ion-icon>
+          </ion-button>
+          <ion-button fill="solid" shape="round" class="ion-padding-end share-btn whatsapp" (click)="shareIn('whatsapp')">
+            <ion-icon slot="icon-only" name="logo-whatsapp"></ion-icon>
+          </ion-button>
+        </div>
       </div>
     </div>
   </div>

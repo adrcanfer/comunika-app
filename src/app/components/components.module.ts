@@ -9,6 +9,7 @@ import { ImgMiniatureComponent } from './img-miniature/img-miniature.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { TextDialogComponent } from './text-dialog/text-dialog.component';
 import { PaymentPlanComponent } from './payment-plan/payment-plan.component';
+import { DownloadAppBannerComponent } from './download-app-banner/download-app-banner.component';
 
 
 
@@ -21,7 +22,8 @@ import { PaymentPlanComponent } from './payment-plan/payment-plan.component';
     ImgMiniatureComponent, 
     GalleryComponent,
     TextDialogComponent,
-    PaymentPlanComponent
+    PaymentPlanComponent,
+    DownloadAppBannerComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { PaymentPlanComponent } from './payment-plan/payment-plan.component';
     ImgMiniatureComponent, 
     GalleryComponent,
     TextDialogComponent,
-    PaymentPlanComponent
+    PaymentPlanComponent,
+    DownloadAppBannerComponent
   ]
 })
 export class ComponentsModule { }

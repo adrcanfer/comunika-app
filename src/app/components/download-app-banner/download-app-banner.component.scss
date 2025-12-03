@@ -1,0 +1,21 @@
+.download-app-banner {
+    background-color: var(--ion-color-primary);
+    color: white;
+    border-radius: 16px;
+     & .title {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 0.5em;
+    }
+    & .steps {
+        width: fit-content;
+        margin: auto;
+    }
+    & .step {
+        margin-left: 12px;
+    }
+    & .store-image {
+        width: 198px;
+        height: 80px;
+    }
+}

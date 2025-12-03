@@ -12,6 +12,8 @@
 <ion-content>
   <div class="container fit-container ion-padding" *ngIf="event">
     <div class="ion-padding">
+
+      <!-- Action Buttons -->
       <div class="text-end ion-padding-bottom">
         <ion-button class="margin-right" fill="outline" shape="round" (click)="back()">Volver</ion-button>
         <ion-button *ngIf="ownerMode" shape="round" class="ion-padding-end" color="secondary" (click)="edit()">
@@ -22,17 +24,20 @@
         </ion-button>
       </div>
 
+      <!-- Title -->
       <div class="title text-center ion-padding">
         {{event.title}}
       </div>
 
+      <!-- Content -->
       <div class="notification-content" [innerHtml]="event.content"></div>
 
+      <!-- Attachments -->
       <div *ngIf="event.attachments.length > 0">
         <app-gallery [attachments]="event.attachments" [editMode]="false"></app-gallery>
       </div>
 
-
+      <!-- Share Buttons -->
       <div class="ion-padding">
         <div class="font-weight-bold text-center ion-padding">
           Compartir en: 
@@ -50,10 +55,18 @@
           <ion-button fill="solid" shape="round" class="ion-padding-end share-btn whatsapp" (click)="shareIn('whatsapp')">
             <ion-icon slot="icon-only" name="logo-whatsapp"></ion-icon>
           </ion-button>
+          <!-- TODO https://play.google.com/store/apps/details?id=com.adrcanfer.comunikame&hl=es -->
         </div>
       </div>
     </div>
+
+    <!-- Download App Banner -->
+    <div class="ion-padding" *ngIf="!ownerMode">
+      <app-download-app-banner [sourceName]="event.source!.name"></app-download-app-banner>
+    </div>
+    
   </div>
+
   <div class="footer fit-container">
     <app-event-footer *ngIf="event" [event]="event"></app-event-footer>
   </div>

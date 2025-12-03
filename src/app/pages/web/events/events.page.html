@@ -28,6 +28,11 @@
       <ion-infinite-scroll (ionInfinite)="loadNextContent($event)" threshold="100px" [disabled]="endInfiniteScroll">
         <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
       </ion-infinite-scroll>
+
+      <!-- Download App Banner -->
+      <div class="download-app-banner" *ngIf="!loggedUser && events && events.length > 0">
+        <app-download-app-banner [sourceName]="events![0].source!.name"></app-download-app-banner>
+      </div>
     </div>
   </div>
 </ion-content>

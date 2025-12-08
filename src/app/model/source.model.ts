@@ -8,6 +8,7 @@ export interface Source {
     plan?: string; //productId
     lastUpdate?: number;
     shortId?: string;
+    subscriptors?: number;
 
     //Aux
     selected?: boolean;

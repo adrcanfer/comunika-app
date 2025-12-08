@@ -70,7 +70,7 @@
                   Suscriptores
                 </div>
                 <div class="row statistics-data ion-padding-bottom">
-                  <div style="padding-right: 4px;">{{account.subscriptors | number:'1.0-0':'es-ES'}}</div> de 
+                  <div style="padding-right: 4px;">{{account.source.subscriptors | number:'1.0-0':'es-ES'}}</div> de 
                   <div style="padding-left: 4px;">
                     <ng-container *ngIf="planDetail!.subscriptions != 'Ilimitado'">{{planDetail!.subscriptions! | number:'1.0-0':'es-ES'}}</ng-container>
                     <ng-container *ngIf="planDetail!.subscriptions == 'Ilimitado'">Ilimitado</ng-container>

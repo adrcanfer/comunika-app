@@ -47,7 +47,7 @@ export class AccountPage implements ViewWillEnter {
 
   getSubscriptorsProgress() {
     if (this.planDetail!.subscriptions != 'Ilimitado') {
-      this.subscriptorsProgress = this.account!.subscriptors / this.planDetail!.subscriptions!;
+      this.subscriptorsProgress = this.account!.source.subscriptors! / this.planDetail!.subscriptions!;
     }
   }
 
